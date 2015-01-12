@@ -44,12 +44,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self configureView];
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+   // if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
+//       // NSIndexPath *indexPath = [MasterViewController.tableView indexPathForSelectedRow];
+//        
+//        //NSString *eventTitle = self.eventList[indexPath.row];
+//        //[[segue destinationViewController] setDetailItem:eventTitle];
+//        [[segue destinationViewController] setDetailItem:self.detailList[indexPath.row]];
+        
+  //  }
+    
 }
 
 @end
