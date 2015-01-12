@@ -13,10 +13,19 @@
 @end
 
 @implementation DetailViewController
+- (IBAction)chekIn:(id)sender {
+}
+- (IBAction)review:(id)sender {
+    
+}
 
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem {
+
+// Setting the background
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
+    
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
@@ -34,8 +43,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
+    
+    //[self configureView];
 }
 
 - (void)didReceiveMemoryWarning {

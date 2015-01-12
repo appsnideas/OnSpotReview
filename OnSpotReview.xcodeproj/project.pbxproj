@@ -37,6 +37,10 @@
 		AC30A43D1A60B2A000E06480 /* ContextProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4351A60B2A000E06480 /* ContextProfiling.framework */; };
 		AC30A43E1A60B2A000E06480 /* FYX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4361A60B2A000E06480 /* FYX.framework */; };
 		AC30A43F1A60B2A000E06480 /* NetworkServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4381A60B2A000E06480 /* NetworkServices.framework */; };
+		ACBF3ED01A612315000ED09E /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBF3ECF1A612315000ED09E /* ReviewViewController.m */; };
+		ACBF3ED41A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED11A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg */; };
+		ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED21A639A95000ED09E /* fog.jpg */; };
+		ACBF3ED61A639A95000ED09E /* vAGZp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED31A639A95000ED09E /* vAGZp.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,11 @@
 		AC30A4351A60B2A000E06480 /* ContextProfiling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextProfiling.framework; sourceTree = "<group>"; };
 		AC30A4361A60B2A000E06480 /* FYX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FYX.framework; path = OnSpotReview/FYX.framework; sourceTree = "<group>"; };
 		AC30A4381A60B2A000E06480 /* NetworkServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NetworkServices.framework; sourceTree = "<group>"; };
+		ACBF3ECE1A612315000ED09E /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		ACBF3ECF1A612315000ED09E /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		ACBF3ED11A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blur-wallpaper-10-2-s-307x512.jpg"; sourceTree = "<group>"; };
+		ACBF3ED21A639A95000ED09E /* fog.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fog.jpg; sourceTree = "<group>"; };
+		ACBF3ED31A639A95000ED09E /* vAGZp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vAGZp.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,18 +135,7 @@
 				AC30A3C51A60AD0E00E06480 /* OnSpotReview */,
 				AC30A3E21A60AD0E00E06480 /* OnSpotReviewTests */,
 				AC30A3C41A60AD0E00E06480 /* Products */,
-				AC30A42C1A60B2A000E06480 /* Common.embeddedframework */,
-				AC30A42E1A60B2A000E06480 /* ContextCore.embeddedframework */,
-				AC30A4301A60B2A000E06480 /* ContextLocation.embeddedframework */,
-				AC30A4341A60B2A000E06480 /* ContextProfiling.embeddedframework */,
-				AC30A4361A60B2A000E06480 /* FYX.framework */,
-				AC30A4371A60B2A000E06480 /* NetworkServices.embeddedframework */,
-				AC30A3F91A60AD8100E06480 /* Security.framework */,
-				AC30A3F71A60AD7A00E06480 /* MapKit.framework */,
-				AC30A3F51A60AD7200E06480 /* libz.dylib */,
-				AC30A3EF1A60AD5B00E06480 /* CoreBluetooth.framework */,
-				AC30A3F01A60AD5B00E06480 /* CoreData.framework */,
-				AC30A3F11A60AD5B00E06480 /* CoreLocation.framework */,
+				ACBF3ED71A639D9C000ED09E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +157,8 @@
 				AC30A3CE1A60AD0E00E06480 /* MasterViewController.m */,
 				AC30A3D01A60AD0E00E06480 /* DetailViewController.h */,
 				AC30A3D11A60AD0E00E06480 /* DetailViewController.m */,
+				ACBF3ECE1A612315000ED09E /* ReviewViewController.h */,
+				ACBF3ECF1A612315000ED09E /* ReviewViewController.m */,
 				AC30A4291A60B03500E06480 /* EventList.h */,
 				AC30A42A1A60B03500E06480 /* EventList.m */,
 				AC30A3D31A60AD0E00E06480 /* Main.storyboard */,
@@ -199,6 +199,9 @@
 		AC30A4181A60AFAF00E06480 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ACBF3ED11A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg */,
+				ACBF3ED21A639A95000ED09E /* fog.jpg */,
+				ACBF3ED31A639A95000ED09E /* vAGZp.jpg */,
 				AC30A4191A60AFAF00E06480 /* ReviewIcon1.jpeg */,
 				AC30A41A1A60AFAF00E06480 /* ReviewIcon2.jpeg */,
 				AC30A41B1A60AFAF00E06480 /* SwaramBig.jpg */,
@@ -263,6 +266,25 @@
 			);
 			name = NetworkServices.embeddedframework;
 			path = OnSpotReview/NetworkServices.embeddedframework;
+			sourceTree = "<group>";
+		};
+		ACBF3ED71A639D9C000ED09E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC30A42C1A60B2A000E06480 /* Common.embeddedframework */,
+				AC30A42E1A60B2A000E06480 /* ContextCore.embeddedframework */,
+				AC30A4301A60B2A000E06480 /* ContextLocation.embeddedframework */,
+				AC30A4341A60B2A000E06480 /* ContextProfiling.embeddedframework */,
+				AC30A4361A60B2A000E06480 /* FYX.framework */,
+				AC30A4371A60B2A000E06480 /* NetworkServices.embeddedframework */,
+				AC30A3F91A60AD8100E06480 /* Security.framework */,
+				AC30A3F71A60AD7A00E06480 /* MapKit.framework */,
+				AC30A3F51A60AD7200E06480 /* libz.dylib */,
+				AC30A3EF1A60AD5B00E06480 /* CoreBluetooth.framework */,
+				AC30A3F01A60AD5B00E06480 /* CoreData.framework */,
+				AC30A3F11A60AD5B00E06480 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,11 +369,14 @@
 			files = (
 				AC30A4271A60AFAF00E06480 /* TestReviewBg.jpg in Resources */,
 				AC30A4211A60AFAF00E06480 /* ReviewIcon1.jpeg in Resources */,
+				ACBF3ED61A639A95000ED09E /* vAGZp.jpg in Resources */,
 				AC30A4231A60AFAF00E06480 /* SwaramBig.jpg in Resources */,
 				AC30A4251A60AFAF00E06480 /* SwaramSmall.jpg in Resources */,
 				AC30A4221A60AFAF00E06480 /* ReviewIcon2.jpeg in Resources */,
 				AC30A3D51A60AD0E00E06480 /* Main.storyboard in Resources */,
+				ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */,
 				AC30A4261A60AFAF00E06480 /* TestIconTrans.jpg in Resources */,
+				ACBF3ED41A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg in Resources */,
 				AC30A4241A60AFAF00E06480 /* SwaramGoldSpot.jpg in Resources */,
 				AC30A4281A60AFAF00E06480 /* TestReviewIcon.jpg in Resources */,
 				AC30A3DA1A60AD0E00E06480 /* LaunchScreen.xib in Resources */,
@@ -376,6 +401,7 @@
 			files = (
 				AC30A3CC1A60AD0E00E06480 /* AppDelegate.m in Sources */,
 				AC30A42B1A60B03500E06480 /* EventList.m in Sources */,
+				ACBF3ED01A612315000ED09E /* ReviewViewController.m in Sources */,
 				AC30A3CF1A60AD0E00E06480 /* MasterViewController.m in Sources */,
 				AC30A3C91A60AD0E00E06480 /* main.m in Sources */,
 				AC30A3D21A60AD0E00E06480 /* DetailViewController.m in Sources */,
@@ -599,6 +625,7 @@
 				AC30A3EB1A60AD0E00E06480 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC30A3EC1A60AD0E00E06480 /* Build configuration list for PBXNativeTarget "OnSpotReviewTests" */ = {
 			isa = XCConfigurationList;
@@ -607,6 +634,7 @@
 				AC30A3EE1A60AD0E00E06480 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

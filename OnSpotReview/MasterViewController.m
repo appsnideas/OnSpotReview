@@ -37,6 +37,10 @@
     [FYX startService:self];
     
 // *********************    Gimbal Related...   *****************************************************
+
+// Setting the background
+    
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vAGZp.jpg"]]];
     
 // *********************************************        App Code   **********************************************************
     
