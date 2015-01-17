@@ -1,0 +1,50 @@
+0. The syntax in Objective -c is very weird. you have to get used to this.
+
+1. .h file(header/declaration file)  - @ Interface means Inheritence. This class (MasterViewController) is a sub class of UITableViewController It can do everything that UITableViewController does + more. Sub class indication is "classname" : "class we are inheriting from". For more info on implementing...check out corresponding .m file
+
+2. .m file (implementation file) - Here we are implementing the inherited MasterViewController class(refer corresponding .h file for more details). This class has the following methods (till @end). Out of this, viewDidLoad is the important one which is used to set up the view when loaded.
+
+3. You can rename any of the views by <<ViewController Header File>> - Tight click on "class name" - refactor - rename - type in a name - "select "Rename Related Files" - Preview - Save - Disable the warning.
+
+4. Connecting 2 view controllers is via segue or using Navigation controller Using a segue: this is using a button, (control)dragging the button to the new view controller. This will create a segue. 
+
+5. Modal view should be used when a page forces an action by the user and have to return back to the same page after user is done doing that. (For us, may be Review could be a modal view). Self contained functionality. (Adding tasks, login etc)
+
+6. Navigation controller controls the hierarchy of views via navigation bar on the top.
+
+7. Push Seque pushes a new view on to navigation stack. It will also add a navigation bar to th view so We can to use the navigation bar to get back to main screen. So if we have a navigation controller, then usually it is recommended that we do not want to add a modal view. because we cannot “hierarchically” get back to main screen using “navigation”. If in the Modal view, you have a functionality that can bring back the main screen then you are good.
+
+8. Align items on a view - This helps to keep the items on the view (buttons, labels etc) as they were placed and seal their positions. To access this, click on the first icon of the 4 icons at the bottom of the story board view named “align”. Select Horizontal and Vertical Center Container” and also from the drop down select “Items of New constraints”.
+
+9. prepareToSegue : Sender method gathers information from the sender (current) view and passes it on to “destination view”. By default it does nothing.
+
+10. when you need to access an object from a view controller, we need to do 2 important things:
+	1. You need to import the corresponding view header file to access the objects
+	2. create a object of the view controller class (ex: MasterViewController *masterController) 
+	3 Now we access the detail controller using the segue property ‘Destination View Controller) and equate it to the above created view 		controller property. This property returns a ‘view controller’ by type ID. We need to cast this to the master/sender view controller. The way 	we do that is:
+DetailViewController *detailController = 	(DetailViewController *) 		segue.destinationViewController
+[Class name]		[variable name]	  [casting the return Id to View Controller]	[segue].[name of the segue property]
+
+11.Array’s and Dictionaries: when writing arrays and dictionary of arrays we use “@“ different;ly and also the braces change. Below are a few examples.
+	1. when writing a simple string: 
+		NSSTring *title = @“Yamudiki Mogudu”;
+	2. when writing a array of strings: 
+		NSArray *songs = @[@“Bahusa nine bandar lo”, @“Andam Indolam”, @“Ekku Bandekku Mava”];
+		NSArray *artists = @[@“SPB, Chitra”, “SPB, Chitra”, “SPB, Chitra”]
+	3. when writing a dictionary of strings with key value: 
+		NSDictionary *album @{@“title”:@“Yamudiki Mogudu”,@“songs”:@[@“Bahusa nine bandar lo”, @“Andam Indolam”, @“Ekku Bandekku Mava”],@“artists”:@[@“SPB, P.Suseela”, 					“SPB, P.Suseela”, “SPB, P.Suseela”]};
+	4. when writing an array of dictionaries as in #3:
+		NSArray *library = @[@{@“title”:@“Yamudiki Mogudu”,@“songs”:@[@“Bahusa nine bandar lo”, @“Andam Indolam”, @“Ekku Bandekku Mava”],@“artists”:@[@“SPB, Chitra”, 					“SPB, Chitra”, “SPB, Chitra”]},
+				     @{@“title”:@“Gharana Mogudu”,@“songs”:@[@“Bangaru Kodi Pitta”, @“Hey Pilla”, @“Endi Bhe”],@“artists”:@[@“SPB, Chitra”, 							“SPB, Chitra”, “SPB, Chitra”]}];
+	5. To summarize - String - @“”, Array - @[], Dictionary - @{@“key”:@“value”}
+
+12. A class has to be initialized in the implementation (object) and has to be allocated and Initialized using methods Alloc and Init. Some more points on class, object and method syntax
+	1. In obj-c all instances, arrays, strings, dictionaries etc and pointers. Hence the *
+	2. method calls are indicated by []. [<<what class or obj the method is called on>> <<method name being called>>]. You can nest any number of method calls as you want but on 	the same class
+	3. Ex: [[[class a method1]method2]method3] - method 2 is called on result of [class a method 1] and method 3 on the result of [[class a method1]method2]
+	4. when passing values in a method call we use “:”. Ex: [class a method1:<value>]
+	5. If method returns something, that value is taken into a variable of corresponding type Ex: <type> <var> = [class a method1]
+	6. when declaring methods we start with ‘-‘, then the type, then the method name with parameters. Ex: -(type)<Method Name>With<what parameters>:<list of parameters>
+	7. Properties are an easy way to declare variable, initializing them and writing setters and getters. All this is done by the compiler when you create a variable as a property. We can use 	this property in the implementation just by importing the header file (where we declared these properties)
+
+

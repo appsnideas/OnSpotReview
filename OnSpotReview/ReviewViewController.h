@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ReviewViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *testLabel;
+@property(strong, nonatomic) NSString *testLabelText;
 
 @end

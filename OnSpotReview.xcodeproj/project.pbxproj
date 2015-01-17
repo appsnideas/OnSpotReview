@@ -41,6 +41,7 @@
 		ACBF3ED41A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED11A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg */; };
 		ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED21A639A95000ED09E /* fog.jpg */; };
 		ACBF3ED61A639A95000ED09E /* vAGZp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED31A639A95000ED09E /* vAGZp.jpg */; };
+		ACBF3F0F1A64801F000ED09E /* DevTips in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3F0E1A64801F000ED09E /* DevTips */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		ACBF3ED11A639A95000ED09E /* blur-wallpaper-10-2-s-307x512.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "blur-wallpaper-10-2-s-307x512.jpg"; sourceTree = "<group>"; };
 		ACBF3ED21A639A95000ED09E /* fog.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fog.jpg; sourceTree = "<group>"; };
 		ACBF3ED31A639A95000ED09E /* vAGZp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vAGZp.jpg; sourceTree = "<group>"; };
+		ACBF3F0E1A64801F000ED09E /* DevTips */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DevTips; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				AC30A4291A60B03500E06480 /* EventList.h */,
 				AC30A42A1A60B03500E06480 /* EventList.m */,
 				AC30A3D31A60AD0E00E06480 /* Main.storyboard */,
+				ACBF3F0E1A64801F000ED09E /* DevTips */,
 				AC30A3D61A60AD0E00E06480 /* Images.xcassets */,
 				AC30A3D81A60AD0E00E06480 /* LaunchScreen.xib */,
 				AC30A3C61A60AD0E00E06480 /* Supporting Files */,
@@ -373,6 +376,7 @@
 				AC30A4231A60AFAF00E06480 /* SwaramBig.jpg in Resources */,
 				AC30A4251A60AFAF00E06480 /* SwaramSmall.jpg in Resources */,
 				AC30A4221A60AFAF00E06480 /* ReviewIcon2.jpeg in Resources */,
+				ACBF3F0F1A64801F000ED09E /* DevTips in Resources */,
 				AC30A3D51A60AD0E00E06480 /* Main.storyboard in Resources */,
 				ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */,
 				AC30A4261A60AFAF00E06480 /* TestIconTrans.jpg in Resources */,

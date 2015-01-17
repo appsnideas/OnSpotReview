@@ -34,7 +34,15 @@ to show the label in the view.
 
 _Vamsi (01/12/2015 1:40 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.2
+Added the blog spot example code alson with the hard coded app code.
+Created sections for example code and app code.
+Non - Hard Cocded - Ecxample code.
+Hardcoded - App code.
+If you ant to execute the app code, comment all the "non-hardcoded" sections
+and uncomment the "hardcoded" sections and vice versa.
+The example code should be moified with OUR JSON URL to gather data.
 
-
+_Vamsi (01/16/2015 9:45 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -7,6 +7,9 @@
 //
 
 #import "ReviewViewController.h"
+#import "DetailViewController.h"
+#import "MasterViewController.h"
+#import "EventList.h"
 
 @interface ReviewViewController ()
 
@@ -19,6 +22,8 @@
     // Do any additional setup after loading the view.
 // Setting the background
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
+    self.testLabel.text = self.testLabelText;
+    
 }
 
 - (void)didReceiveMemoryWarning {

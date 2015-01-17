@@ -28,7 +28,7 @@
      put on the top of application:didFinishLaunchingWithOptions, so it will not
      proceed to show window until sleep interval is finished.*/
     
-    [NSThread sleepForTimeInterval:2]; //add 5 seconds longer.
+    //[NSThread sleepForTimeInterval:2]; //add 5 seconds longer.
     
     return YES;
 }

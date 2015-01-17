@@ -6,7 +6,12 @@
 //  Copyright (c) 2015 appsnideas. All rights reserved.
 //
 
+#import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "ReviewViewController.h"
+#import "EventList.h"
+#import "Foundation/Foundation.h"
+#import "UIKit/UIKitDefines.h"
 
 @interface DetailViewController ()
 
@@ -16,7 +21,8 @@
 - (IBAction)chekIn:(id)sender {
 }
 - (IBAction)review:(id)sender {
-    
+    //ReviewViewController *reviewController = [[ReviewViewController alloc]init];
+    //reviewController.testLabel.text = @"Hey Are you there??";
 }
 
 #pragma mark - Managing the detail item
@@ -55,15 +61,23 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   
+    if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
+       MasterViewController *masterController = [[MasterViewController alloc]init];
+        ReviewViewController *reviewController = (ReviewViewController *) segue.destinationViewController;
+        //MasterViewController *masterController = (MasterViewController *) segue.destinationViewController;
+        //EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
+        NSIndexPath *indexPath = [masterController.tableView indexPathForSelectedRow];
+        reviewController.testLabelText = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        //reviewController.testLabelText= @"Are you there??";
+        NSLog(@"Row Selected: %ld",indexPath.row);
+     
     
-   // if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
-//       // NSIndexPath *indexPath = [MasterViewController.tableView indexPathForSelectedRow];
-//        
-//        //NSString *eventTitle = self.eventList[indexPath.row];
-//        //[[segue destinationViewController] setDetailItem:eventTitle];
-//        [[segue destinationViewController] setDetailItem:self.detailList[indexPath.row]];
-        
-  //  }
+        //NSLog([NSString stringWithFormat:@"%ld",(long)indexPath.row]);
+        //ReviewViewController *reviewController = [[ReviewViewController alloc]init];
+        //reviewController.testLabelText= @"Are you there??";
+
+    }
     
 }
 
