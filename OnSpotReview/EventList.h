@@ -12,15 +12,31 @@
 
 }
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *author;
-@property (nonatomic, strong) NSString *date;
+// Event Parameters Declaration passed by event URL
+@property (nonatomic, strong) NSString *eventId;
+@property (nonatomic, strong) NSString *eventName;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *contactName;
+@property (nonatomic, strong) NSString *phone;
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *addressStreet1;
+@property (nonatomic, strong) NSString *addressStreet2;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *zipcode;
+@property (nonatomic, strong) NSString *Country;
+@property (nonatomic, strong) NSString *dateTime;
 @property (nonatomic, strong) NSString *thumbnail;
-@property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) NSURL *website;
+@property (nonatomic, strong) NSURL *ticketingURL;
+@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *latitude;
 
-// These doesn;t need Strong/weak because these are primitive types.
-@property (nonatomic) int views;
-@property (nonatomic) BOOL unread;
+// Review Questions dictionary
+@property (nonatomic, strong) NSDictionary *reviewQuestions;
+@property (nonatomic, strong) NSDictionary *reviewAnswers;
+
 
 /*  Designated Initializer - This is used to initialize the instance of the class (object) - ex: init
     This can also be used to initialize the instance with specific required instance variables (if any) Ex: initWithObjects.
@@ -31,10 +47,13 @@
  */
 
 //Designated initializer
-- (id) initWithTitle: (NSString *) title;
-+ (id) eventListWithTitle: (NSString *) title;
+- (id) initWithName: (NSString *) name;
 
-- (NSURL *) thumbnailURL;
++ (id) eventListWithName: (NSString *) name;
+
+//- (NSURL *) ticketingURL;
+
+//- (NSURL *) website;
 
 - (NSString *) formattedDate;
 

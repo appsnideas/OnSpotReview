@@ -44,61 +44,76 @@
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vAGZp.jpg"]]];
     
 // *************** BEGIN Non- Hardcoded.  *************************
-/*
+
 // Grabbing data from URL
-    NSURL *eventsURL = [NSURL URLWithString:@"http://blog.teamtreehouse.com/api/get_recent_summary/"];
+    NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents"];
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
     NSError *error = nil;
-
-// Extracting JSON from File
-//    NSLog(@"In Master View Download");
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"/Users/vamsi/Apps/OnSpotReview/Events_JSON.txt" ofType:@"json"];
-//    NSLog(@"After filepath");
-//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-//    NSString *jsonData = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-//    NSArray *eventListArray = [jsonData JSONValue];
-//    NSLog(@"%@", jsonData);
- 
     
-// Creating a data dictionary for all the posts grabbed from URL and serialized using JSON Searialization.
-    NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+// Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
+    NSArray *eventListArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     
 // instantiating 'Mutable Array declared in .h. Why Mutable - coz we are adding elements dynamically and do not know the capcity.
     self.eventList1 = [NSMutableArray array];
     
 // Creating an array to hold all the posts from the data dictionary of posts from above. This is basically an array of post dictionaries
 
-    NSArray *eventListArray = [dataDictionary objectForKey:@"posts"];
+    //NSArray *eventListArray = [dataDictionary objectForKey:@"posts"];
     
-// Loop thru the array of dictionaries to parse and store the data into our custom class.
-    for (NSDictionary *eventDictionary in eventListArray) {
-         //NSLog(@"%@", [eventDictionary objectForKey:@"reviewquestions"]);
-// Here we instantiate (as in learning code) an object of our custom class 'EventList and add data into its properties.
+// Loop thru the array to parse and store the data into our custom class.
+// Here we instantiate an object (eventLists) of our custom class, 'EventList' and add data into its properties (Declared variables).
 // NOTE: The ending parts (@title, @author etc..are keys from URL, not our variables
-        EventList *eventLists = [EventList eventListWithTitle:[eventDictionary objectForKey:@"title"]];
-        eventLists.author = [eventDictionary objectForKey:@"author"];
-        eventLists.thumbnail = [eventDictionary objectForKey:@"thumbnail"];
-        eventLists.date = [eventDictionary objectForKey:@"date"];
-// Blog JSON's URL is a string. We need something that we can click on it and open it in a browser, which is type NSURL. So,We need
-// to convert the JSON URL 'String' to NSURL Type (Our url property in custom class is also NSURL type) and hence the below line of code.
-        eventLists.URL = [NSURL URLWithString:[eventDictionary objectForKey:@"url"]];
+
+    for (NSDictionary *eventDictionary in eventListArray)
+    {
+        EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
+        eventLists.address = [eventDictionary objectForKey:@"address"];
+        eventLists.description = [eventDictionary objectForKey:@"description"];
+        eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
+       /* if (eventLists.address == NULL){
+            eventLists.address = nil;
+        }
+        else {
+            eventLists.address = [eventDictionary objectForKey:@"address"];
+        }
+        if (eventLists.description == NULL){
+            eventLists.description = nil;
+        }
+        else {
+            eventLists.description = [eventDictionary objectForKey:@"description"];
+        }
+        if (eventLists.dateTime == NULL){
+            eventLists.dateTime = nil;
+        }
+        else {
+            eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
+        }*/
+        
+// JSON's URLs are strings. We need something that we can click on it and open it in a browser, which is type NSURL. So,We need
+// to convert the JSON URL 'String' to NSURL Type and hence the below lines of code.
+        eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
+        //eventLists.ticketingURL = [NSURL URLWithString:[eventDictionary objectForKey:@"ticketingurl"]];
+        /*if (eventLists.website == NULL){
+            eventLists.website = nil;
+        }
+        else {
+            eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
+        }
+        if (eventLists.ticketingURL == NULL){
+            eventLists.ticketingURL = nil;
+        }
+        else {
+            eventLists.ticketingURL = [NSURL URLWithString:[eventDictionary objectForKey:@"ticketingurl"]];
+        }*/
+
+// What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
     }
-     
-//     // grabbing data from db using API/URL
-//     self.eventList = [dataDictionary objectForKey:@"posts"]; - //This may or may not be needed.
-//      NSURL *eventURL = [NSURL URLWithString:@"<<URL>>"];
-//      NSData *jsonData = [NSData dataWithContentsOfURL:eventURL];
-//      NSLog(@"%@", jsonData);
-//      NSError *error = nil;
-    
-    // NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-     //self.eventList = [NSArray arrayWithObjects:swaramEvent1,swaramEvent2,swaramEvent3,swaramEvent4,swaramEvent5,swaramEvent6, nil];
-*/
+
 // ***************  END Non- Hardcoded.  *************************
     
 // ***************  BEGIN Hardcoded.  *************************
-  
+  /*
      NSDictionary *swaramEvent1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 1",@"title",@"Feb 7th 2015",@"date",@"Saratoga, CA",@"place",@"1:00 PM",@"time",nil];
      NSDictionary *swaramEvent2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 2",@"title",@"Feb 7th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
      NSDictionary *swaramEvent3 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 3",@"title",@"Feb 8th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
@@ -107,7 +122,7 @@
      NSDictionary *swaramEvent6 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Telugu Drama 2",@"title",@"Feb 14th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
     
      self.eventList = [NSArray arrayWithObjects:swaramEvent1,swaramEvent2,swaramEvent3,swaramEvent4,swaramEvent5,swaramEvent6,nil];
-   
+ */
 // *************** END Hardcoded.  *************************
     
      }
@@ -117,24 +132,26 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 // ***************  BEGIN Non- Hardcoded.  *************************
-/*
+    /*
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+
 // Opening a web page using the URL.
+    
         EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
         UIApplication *application = [UIApplication sharedApplication];
-        [application openURL:eventLists.URL];
+        //[application openURL:eventLists.URL];
         
         //NSString *eventTitle = self.eventList[indexPath.row];
         //[[segue destinationViewController] setDetailItem:eventTitle];
-        [[segue destinationViewController] setDetailItem:self.detailList[indexPath.row]];
-        //NSLog(@"Row Selected: %ld",indexPath.row);
-    }
-*/
+        [[segue destinationViewController] setDetailItem:self.eventList1[indexPath.row]];
+        NSLog(@"Row Selected: %ld",indexPath.row);
+    }*/
+
 // *************** END Non- Hardcoded.  *************************
     
 // ***************  BEGIN Hardcoded.  *************************
-  
+ /*
      _detailList = @[@"Gold Spot\nSwaram Tamil Drama\nSaturday Feb 7th\nTime: 1:00 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
      @"Gold Spot\nSwaram Tamil Drama\nSaturday Feb 7th\nTime: 5:30 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
      @"Gold Spot\nSwaram Tamil Drama\nSunday Feb 8th\nTime: 5:30 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
@@ -155,7 +172,7 @@
          [[segue destinationViewController] setDetailItem:self.detailList[indexPath.row]];
          
      }
-   
+ */
 // ***************  END Hardcoded.  *************************
     
 }
@@ -170,13 +187,13 @@
     
 // ***************  BEGIN Hardcoded.  **************
     
-    return self.eventList.count;
+   // return self.eventList.count;
     
 // ***************  END Hardcoded.  ****************
     
 // ***************  BEGIN Non- Hardcoded.  ***************
     
-    //return self.eventList1.count;
+    return self.eventList1.count;
 
 // ***************  END Non- Hardcoded.  *************************
 }
@@ -186,30 +203,29 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
 // ***************  BEGIN Hardcoded.  *************************
-    
+  /*
     NSDictionary *eventRow = [self.eventList objectAtIndex:indexPath.row];
      cell.textLabel.text = [eventRow valueForKey:@"title"];
      cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@ Time: %@", [eventRow valueForKey:@"date"], [eventRow valueForKey:@"time"]];
-  
+  */
 // ***************  END Hardcoded.  *************************
     
 // ***************  BEGIN Non- Hardcoded.  *************************
-   /*
+   
     EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-    // NSLog(@"%@", eventLists.thumbnail);
-    
+    cell.textLabel.text = eventLists.eventName;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@ Address: %@", [eventLists formattedDate], eventLists.address];
+   /*
+// If we need to create a image URL then we need the following code.
     if ( [eventLists.thumbnail isKindOfClass:[NSString class]]) {
-        NSData *imageData = [NSData dataWithContentsOfURL:eventLists.thumbnailURL];
-        UIImage *image = [UIImage imageWithData:imageData];
-        cell.imageView.image = image;
-    } else{
-        cell.imageView.image = [UIImage imageNamed:@"ReviewIcon2.jpeg"];
-    }
-    
-    cell.textLabel.text = eventLists.title;
-    //cell.detailTextLabel.text = eventLists.author;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Author: %@ Date: %@", eventLists.author, [eventLists formattedDate]];
- */
+     //NSData *imageData = [NSData dataWithContentsOfURL:eventLists.thumbnailURL];
+        NSData *imageData = [NSData dataWithContentsOfFile:@"/Users/vamsi/Apps/OnSpotReview/images/Swaram_Small.jpg"];
+     UIImage *image = [UIImage imageWithData:imageData];
+     cell.imageView.image = image;
+     } else{
+     cell.imageView.image = [UIImage imageNamed:@"ReviewIcon2.jpeg"];
+     }*/
+     
 // ***************  END Non- Hardcoded.  *************************
     
 // Can be utilized for Web JSON data

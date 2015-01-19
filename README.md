@@ -45,4 +45,12 @@ The example code should be moified with OUR JSON URL to gather data.
 
 _Vamsi (01/16/2015 9:45 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.3
+All Hardcoded code is commented out and is not needed from this point on...Will clean this up later..
+Added code to gather event data from URL from website.
+Parsed the JSON and showing the event list.
+
+Still have to work on populating rthe detail view lable with details.
+Populate the review controller with review questions.
+Gimball pop-up.
 
