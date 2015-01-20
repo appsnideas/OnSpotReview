@@ -13,6 +13,7 @@
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 - (IBAction)review:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UITextView *eventDetailLabel;
 
 @end
 

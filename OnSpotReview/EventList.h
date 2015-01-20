@@ -28,7 +28,8 @@
 @property (nonatomic, strong) NSString *Country;
 @property (nonatomic, strong) NSString *dateTime;
 @property (nonatomic, strong) NSString *thumbnail;
-@property (nonatomic, strong) NSURL *website;
+//@property (nonatomic, strong) NSURL *website;
+@property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSURL *ticketingURL;
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *latitude;
@@ -53,7 +54,7 @@
 
 //- (NSURL *) ticketingURL;
 
-//- (NSURL *) website;
+- (NSURL *) websiteURL;
 
 - (NSString *) formattedDate;
 

@@ -51,9 +51,12 @@
 + (id) eventListWithName: (NSString *) title{
     return [[self alloc] initWithName:title];
 }
-/*- (NSURL *) website {
+
+- (NSURL *) websiteURL
+{
+    //return [NSURL URLWithString:self.website];
     return [NSURL URLWithString:self.website];
-}*/
+}
 - (NSString *) formattedDate {
     // Date Formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -62,7 +65,7 @@
     [dateFormatter setLocale:posix];
     NSDate *formattedDate = [dateFormatter dateFromString:self.dateTime];
     //[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    [dateFormatter setDateFormat:@"EE MMM,dd yyyy hh:mm"];
+    [dateFormatter setDateFormat:@"MMM dd yyyy 'at' hh:mm a"];
     return [dateFormatter stringFromDate:formattedDate];
 }
 

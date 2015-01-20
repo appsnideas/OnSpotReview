@@ -53,4 +53,12 @@ Parsed the JSON and showing the event list.
 Still have to work on populating rthe detail view lable with details.
 Populate the review controller with review questions.
 Gimball pop-up.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.4
+Finished populating the detail label with correstpoding devent details from the master.
 
+One issue with this is the links are not clickable. People recommend using UI text instead. When tried, the Image is getting messed up and the view itself is gettting messed up. Need to investigate why.
+Still have to code on gimball pop up screen and 3rd view for review questions.
+
+_Vamsi (01/20/2015 1:12 am)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

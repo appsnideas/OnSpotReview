@@ -36,7 +36,7 @@
         _detailItem = newDetailItem;
         
         // Update the view.
-        [self configureView];
+        //[self configureView];
     }
 }
 
@@ -44,12 +44,15 @@
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
+        //self.eventDetailLabel.text = [self.detailItem description];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Setting the background
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
     [self configureView];
 }
 

@@ -31,7 +31,8 @@
     [super awakeFromNib];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
 // *********************    Gimbal Related... Starting FYX Service  *********************************
@@ -42,23 +43,17 @@
 
 // Setting the background
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vAGZp.jpg"]]];
-    
-// *************** BEGIN Non- Hardcoded.  *************************
 
 // Grabbing data from URL
     NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents"];
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
     NSError *error = nil;
-    
+
 // Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
     NSArray *eventListArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     
 // instantiating 'Mutable Array declared in .h. Why Mutable - coz we are adding elements dynamically and do not know the capcity.
     self.eventList1 = [NSMutableArray array];
-    
-// Creating an array to hold all the posts from the data dictionary of posts from above. This is basically an array of post dictionaries
-
-    //NSArray *eventListArray = [dataDictionary objectForKey:@"posts"];
     
 // Loop thru the array to parse and store the data into our custom class.
 // Here we instantiate an object (eventLists) of our custom class, 'EventList' and add data into its properties (Declared variables).
@@ -67,154 +62,92 @@
     for (NSDictionary *eventDictionary in eventListArray)
     {
         EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
-        eventLists.address = [eventDictionary objectForKey:@"address"];
-        eventLists.description = [eventDictionary objectForKey:@"description"];
-        eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
-       /* if (eventLists.address == NULL){
-            eventLists.address = nil;
+        
+        if ([eventDictionary objectForKey:@"address"] == NULL){
+            eventLists.address = NULL;
         }
         else {
             eventLists.address = [eventDictionary objectForKey:@"address"];
         }
-        if (eventLists.description == NULL){
-            eventLists.description = nil;
+        if ([eventDictionary objectForKey:@"description"] == NULL){
+            eventLists.description = NULL;
         }
         else {
             eventLists.description = [eventDictionary objectForKey:@"description"];
         }
-        if (eventLists.dateTime == NULL){
-            eventLists.dateTime = nil;
+        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL){
+            eventLists.dateTime = NULL;
         }
         else {
             eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
-        }*/
-        
+        }
+// There are 3 "_Ids" in the JSON, have to figure out how to differentiate these.
+        if ([eventDictionary objectForKey:@"_id"] == NULL){
+         eventLists.eventId = nil;
+         }
+         else {
+         eventLists.eventId = [eventDictionary objectForKey:@"_id"];
+         }
 // JSON's URLs are strings. We need something that we can click on it and open it in a browser, which is type NSURL. So,We need
 // to convert the JSON URL 'String' to NSURL Type and hence the below lines of code.
-        eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
-        //eventLists.ticketingURL = [NSURL URLWithString:[eventDictionary objectForKey:@"ticketingurl"]];
-        /*if (eventLists.website == NULL){
-            eventLists.website = nil;
+        
+        if ([eventDictionary objectForKey:@"website"] == NULL){
+            eventLists.website = NULL;
         }
         else {
-            eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
+            //eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
+            eventLists.website = [eventDictionary objectForKey:@"website"];
         }
-        if (eventLists.ticketingURL == NULL){
-            eventLists.ticketingURL = nil;
+// We need to handle null strings (converted to null NSURL object). Will take care of this later.
+        /*  if ([eventDictionary objectForKey:@"ticketingurl"] == NULL){
+            eventLists.ticketingURL = Nil;
         }
-        else {
+        else
             eventLists.ticketingURL = [NSURL URLWithString:[eventDictionary objectForKey:@"ticketingurl"]];
+            NSLog(@"In ticket else");
         }*/
 
 // What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
+        //NSLog(@"Id: %@", eventLists.eventId);
     }
-
-// ***************  END Non- Hardcoded.  *************************
-    
-// ***************  BEGIN Hardcoded.  *************************
-  /*
-     NSDictionary *swaramEvent1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 1",@"title",@"Feb 7th 2015",@"date",@"Saratoga, CA",@"place",@"1:00 PM",@"time",nil];
-     NSDictionary *swaramEvent2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 2",@"title",@"Feb 7th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
-     NSDictionary *swaramEvent3 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 3",@"title",@"Feb 8th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
-     NSDictionary *swaramEvent4 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Tamil Drama 4",@"title",@"Feb 14th 2015",@"date",@"Saratoga, CA",@"place",@"1:00 PM",@"time",nil];
-     NSDictionary *swaramEvent5 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Telugu Drama 1",@"title",@"Feb 8th 2015",@"date",@"Saratoga, CA",@"place",@"1:00 PM",@"time",nil];
-     NSDictionary *swaramEvent6 = [NSDictionary dictionaryWithObjectsAndKeys:@"Swaram Telugu Drama 2",@"title",@"Feb 14th 2015",@"date",@"Saratoga, CA",@"place",@"5:30 PM",@"time",nil];
-    
-     self.eventList = [NSArray arrayWithObjects:swaramEvent1,swaramEvent2,swaramEvent3,swaramEvent4,swaramEvent5,swaramEvent6,nil];
- */
-// *************** END Hardcoded.  *************************
-    
-     }
+}
 
 #pragma mark - Segues
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-// ***************  BEGIN Non- Hardcoded.  *************************
-    /*
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"])
+    {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-
-// Opening a web page using the URL.
-    
         EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-        UIApplication *application = [UIApplication sharedApplication];
-        //[application openURL:eventLists.URL];
-        
-        //NSString *eventTitle = self.eventList[indexPath.row];
-        //[[segue destinationViewController] setDetailItem:eventTitle];
-        [[segue destinationViewController] setDetailItem:self.eventList1[indexPath.row]];
-        NSLog(@"Row Selected: %ld",indexPath.row);
-    }*/
+        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description];
+        [[segue destinationViewController] setDetailItem:detailLabelText];        
+// Opening a web page using the URL.
+        //UIApplication *application = [UIApplication sharedApplication];
+        //[application openURL:eventLists.website];
 
-// *************** END Non- Hardcoded.  *************************
-    
-// ***************  BEGIN Hardcoded.  *************************
- /*
-     _detailList = @[@"Gold Spot\nSwaram Tamil Drama\nSaturday Feb 7th\nTime: 1:00 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
-     @"Gold Spot\nSwaram Tamil Drama\nSaturday Feb 7th\nTime: 5:30 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
-     @"Gold Spot\nSwaram Tamil Drama\nSunday Feb 8th\nTime: 5:30 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
-     @"Gold Spot\nSwaram Tamil Drama 4\nSatday Feb 14th\nTime: 1:00 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
-     @"Gold Spot\nSwaram Telugu Drama 1\nSunday Feb 8th\nTime: 1:00 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information: www.swaram.org",
-     @"Gold Spot\nSwaram Telugu Drama 2\nSaturday Feb 14th\nTime: 5:30 PM\nVenue: West Valley College Theatre\n14000 Fruitvale Avenue\nSaratoga, CA 95070\nFor more information:www.swaram.org"];
-     
-     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-         //DetailViewController *detailView = [[DetailViewController alloc] init];
-         //DetailViewController *detailView = [[DetailViewController alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-         
-    //Setting the background for detail view
-        //detailView.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
-         
-         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-         //NSString *eventTitle = self.eventList[indexPath.row];
-         //[[segue destinationViewController] setDetailItem:eventTitle];
-         [[segue destinationViewController] setDetailItem:self.detailList[indexPath.row]];
-         
-     }
- */
-// ***************  END Hardcoded.  *************************
-    
+    }
 }
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-// ***************  BEGIN Hardcoded.  **************
-    
-   // return self.eventList.count;
-    
-// ***************  END Hardcoded.  ****************
-    
-// ***************  BEGIN Non- Hardcoded.  ***************
-    
     return self.eventList1.count;
-
-// ***************  END Non- Hardcoded.  *************************
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-// ***************  BEGIN Hardcoded.  *************************
-  /*
-    NSDictionary *eventRow = [self.eventList objectAtIndex:indexPath.row];
-     cell.textLabel.text = [eventRow valueForKey:@"title"];
-     cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@ Time: %@", [eventRow valueForKey:@"date"], [eventRow valueForKey:@"time"]];
-  */
-// ***************  END Hardcoded.  *************************
-    
-// ***************  BEGIN Non- Hardcoded.  *************************
-   
     EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
     cell.textLabel.text = eventLists.eventName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@ Address: %@", [eventLists formattedDate], eventLists.address];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@",[eventLists formattedDate]];
    /*
 // If we need to create a image URL then we need the following code.
     if ( [eventLists.thumbnail isKindOfClass:[NSString class]]) {
@@ -225,11 +158,6 @@
      } else{
      cell.imageView.image = [UIImage imageNamed:@"ReviewIcon2.jpeg"];
      }*/
-     
-// ***************  END Non- Hardcoded.  *************************
-    
-// Can be utilized for Web JSON data
-        //cell.detailTextLabel.text = [NSString stringWithFormat:@"Venue: %@ Date: %@", eventLists.author, eventLists.date];
     
 // Beautify the cells by adding color and alternating.
     static NSString *cellIdentifier = @"DefaultCell";
@@ -243,11 +171,6 @@
 // end beauify
     
     return cell;
-    
-    //NSString *object = self.eventList[indexPath.row];
-    //cell.textLabel.text = object;
-    //return cell;
-    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
