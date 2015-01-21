@@ -11,5 +11,6 @@
 @interface ReviewViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *testLabel;
 @property(strong, nonatomic) NSString *testLabelText;
+@property (strong, nonatomic) IBOutlet UITableView *reviewQuestionsTable;
 
 @end

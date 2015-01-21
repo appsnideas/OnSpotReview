@@ -63,53 +63,67 @@
     {
         EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
         
-        if ([eventDictionary objectForKey:@"address"] == NULL){
+        if ([eventDictionary objectForKey:@"address"] == NULL)
+        {
             eventLists.address = NULL;
         }
-        else {
+        else
+        {
             eventLists.address = [eventDictionary objectForKey:@"address"];
         }
-        if ([eventDictionary objectForKey:@"description"] == NULL){
+        
+        if ([eventDictionary objectForKey:@"description"] == NULL)
+        {
             eventLists.description = NULL;
         }
-        else {
+        else
+        {
             eventLists.description = [eventDictionary objectForKey:@"description"];
         }
-        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL){
+        
+        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL)
+        {
             eventLists.dateTime = NULL;
         }
-        else {
+        else
+        {
             eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
         }
-// There are 3 "_Ids" in the JSON, have to figure out how to differentiate these.
-        if ([eventDictionary objectForKey:@"_id"] == NULL){
-         eventLists.eventId = nil;
-         }
-         else {
-         eventLists.eventId = [eventDictionary objectForKey:@"_id"];
-         }
-// JSON's URLs are strings. We need something that we can click on it and open it in a browser, which is type NSURL. So,We need
-// to convert the JSON URL 'String' to NSURL Type and hence the below lines of code.
         
-        if ([eventDictionary objectForKey:@"website"] == NULL){
-            eventLists.website = NULL;
-        }
-        else {
-            //eventLists.website = [NSURL URLWithString:[eventDictionary objectForKey:@"website"]];
-            eventLists.website = [eventDictionary objectForKey:@"website"];
-        }
-// We need to handle null strings (converted to null NSURL object). Will take care of this later.
-        /*  if ([eventDictionary objectForKey:@"ticketingurl"] == NULL){
-            eventLists.ticketingURL = Nil;
+        if ([eventDictionary objectForKey:@"_id"] == NULL)
+        {
+            eventLists.eventId = NULL;
         }
         else
-            eventLists.ticketingURL = [NSURL URLWithString:[eventDictionary objectForKey:@"ticketingurl"]];
-            NSLog(@"In ticket else");
-        }*/
-
+        {
+             eventLists.eventId = [eventDictionary objectForKey:@"_id"];
+        }
+        
+        if ([eventDictionary objectForKey:@"website"] == NULL)
+        {
+            eventLists.website = NULL;
+        }
+        else
+        {
+            eventLists.website = [eventDictionary objectForKey:@"website"];
+        }
+        
+        if ([eventDictionary objectForKey:@"ticketingurl"] == NULL)
+        {
+            eventLists.ticketingURL = NULL;
+        }
+        else
+        {
+            eventLists.ticketingURL = [eventDictionary valueForKeyPath:@"ticketingurl.ticketingurl"];
+        }
+        
+//Populating data dictionary for review questions.
+        eventLists.reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
+        eventLists.reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
+        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:eventLists.reviewQuestion, eventLists.reviewQuestionId, nil];
+        
 // What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
-        //NSLog(@"Id: %@", eventLists.eventId);
     }
 }
 
@@ -121,7 +135,7 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description];
+        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@\n\n%@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description, eventLists.reviewQuestions.allValues];
         [[segue destinationViewController] setDetailItem:detailLabelText];        
 // Opening a web page using the URL.
         //UIApplication *application = [UIApplication sharedApplication];
@@ -178,71 +192,6 @@
     return NO;
 }
 
-// ************************    Default Code    **************************************
-/*
- 
-// This code is from viewDidLoad Method. Just FYI
-
- //Do any additional setup after loading the view, typically from a nib.
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    //self.navigationItem.rightBarButtonItem = addButton;
-
-// This code is from viewDidLoad Method. Just FYI
- 
- - (void)didReceiveMemoryWarning {
- [super didReceiveMemoryWarning];
- // Dispose of any resources that can be recreated.
- }
- 
- - (void)insertNewObject:(id)sender {
- if (!self.objects) {
- self.objects = [[NSMutableArray alloc] init];
- }
- [self.objects insertObject:[NSDate date] atIndex:0];
- NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
- [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
- }
- 
-
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- [self.objects removeObjectAtIndex:indexPath.row];
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
- }
- }
-
- //This is actually not needed in a Master-Detail set up. This is more for Single View Controller with another view controller created by user. The equivalent of this in Master- Detail is "prepareForSegue" method. Commenting out this method.
- 
- #pragma mark - Table view delegate
- 
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Navigation logic may go here. Create and push another view controller.
- DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"Nib name" bundle:nil];
- // ..
- // Pass the selected object to the new view controller.
- [self.navigationController pushViewController:detailViewController animated:YES];
- 
- }
-
- #pragma mark - Table view delegate
- 
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Navigation logic may go here. Create and push another view controller.
- DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"Nib name" bundle:nil];
- // ..
- // Pass the selected object to the new view controller.
- [self.navigationController pushViewController:detailViewController animated:YES];
- 
- }
- */
-// ************************    Default Code    **************************************
-
-
 // *********************    Gimbal Related...   ************************************
 
 - (void)serviceStarted
@@ -265,6 +214,88 @@
 - (void)didArrive:(FYXVisit *)visit;
 {
     // this will be invoked when an authorized transmitter is sighted for the first time
+    // Grabbing data from URL
+    NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents/54ba0e697ae8c6090051e9b0"];
+    NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
+    NSError *error = nil;
+    
+    // Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
+    NSDictionary *eventDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    
+    // instantiating 'Mutable Array declared in .h. Why Mutable - coz we are adding elements dynamically and do not know the capcity.
+    self.eventList1 = [NSMutableArray array];
+    
+    // Loop thru the array to parse and store the data into our custom class.
+    // Here we instantiate an object (eventLists) of our custom class, 'EventList' and add data into its properties (Declared variables).
+    // NOTE: The ending parts (@title, @author etc..are keys from URL, not our variables
+    
+    //for (NSDictionary *eventDictionary in eventListArray)
+    //{
+        EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
+        
+        if ([eventDictionary objectForKey:@"address"] == NULL)
+        {
+            eventLists.address = NULL;
+        }
+        else
+        {
+            eventLists.address = [eventDictionary objectForKey:@"address"];
+        }
+        
+        if ([eventDictionary objectForKey:@"description"] == NULL)
+        {
+            eventLists.description = NULL;
+        }
+        else
+        {
+            eventLists.description = [eventDictionary objectForKey:@"description"];
+        }
+        
+        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL)
+        {
+            eventLists.dateTime = NULL;
+        }
+        else
+        {
+            eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
+        }
+        
+        if ([eventDictionary objectForKey:@"_id"] == NULL)
+        {
+            eventLists.eventId = NULL;
+        }
+        else
+        {
+            eventLists.eventId = [eventDictionary objectForKey:@"_id"];
+        }
+        
+        if ([eventDictionary objectForKey:@"website"] == NULL)
+        {
+            eventLists.website = NULL;
+        }
+        else
+        {
+            eventLists.website = [eventDictionary objectForKey:@"website"];
+        }
+        
+        if ([eventDictionary objectForKey:@"ticketingurl"] == NULL)
+        {
+            eventLists.ticketingURL = NULL;
+        }
+        else
+        {
+            eventLists.ticketingURL = [eventDictionary valueForKeyPath:@"ticketingurl.ticketingurl"];
+        }
+        
+        //Populating data dictionary for review questions.
+        eventLists.reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
+        eventLists.reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
+        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:eventLists.reviewQuestion, eventLists.reviewQuestionId, nil];
+        
+        // What exactly does this statement do??
+        [self.eventList1 addObject:eventLists];
+   // }
+
     NSLog(@"I arrived at a Gimbal Beacon!!! %@", visit.transmitter.name);
 }
 - (void)receivedSighting:(FYXVisit *)visit updateTime:(NSDate *)updateTime RSSI:(NSNumber *)RSSI;
@@ -282,3 +313,10 @@
 // *********************    Gimbal Related...   *********************************
 
 @end
+    
+// Code for review questions. Not being used now but saving here just in case.
+/* for (NSDictionary [eventLists.reviewQuestions] in eventLists.reviewQuestionsArray)
+ {
+ eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:[eventDictionary valueForKeyPath:@"reviewquestions.question"],[eventDictionary valueForKeyPath:@"reviewquestions.id"], nil];
+ }*/
+

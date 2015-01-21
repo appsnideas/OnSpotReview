@@ -62,3 +62,12 @@ Still have to code on gimball pop up screen and 3rd view for review questions.
 
 _Vamsi (01/20/2015 1:12 am)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.5
+Have code to parse the JSON completely, though not all data has been parsed. Only needed parts have been parsed and stored in custom (EventList) class.
+Also added gimbal code to enable Gimbal. (QLContext...)
+Also added code in gimbal (didArrive method) to grab JSON data and searialization code and parsing code. This will be used especially for pop up of questions based on event. Note that the event Id will be included in this URL, that will be transmitted by the beacon.
+Also removed all the default commented code from masterViewController.
+
+_Vamsi (01/20/2012 11:00 PM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

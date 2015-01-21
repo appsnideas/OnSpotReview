@@ -64,15 +64,14 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   /*
+   
     if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
-       MasterViewController *masterController = [[MasterViewController alloc]init];
+        MasterViewController *masterController = [[MasterViewController alloc]init];
         ReviewViewController *reviewController = (ReviewViewController *) segue.destinationViewController;
         //MasterViewController *masterController = (MasterViewController *) segue.destinationViewController;
         //EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
         NSIndexPath *indexPath = [masterController.tableView indexPathForSelectedRow];
         reviewController.testLabelText = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        //reviewController.testLabelText= @"Are you there??";
         NSLog(@"Row Selected: %ld",indexPath.row);
      
     
@@ -81,7 +80,7 @@
         //reviewController.testLabelText= @"Are you there??";
 
     }
- */   
+    
 }
 
 @end

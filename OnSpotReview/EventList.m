@@ -30,6 +30,11 @@
 @synthesize ticketingURL;
 @synthesize longitude;
 @synthesize latitude;
+@synthesize reviewQuestions;
+@synthesize reviewAnswers;
+@synthesize reviewQuestionsArray;
+@synthesize reviewQuestionId;
+@synthesize reviewQuestion;
 
 /* Here in the .m, we initialize the designated Initializer
  We declare/initialize "Self" indicating self is this class and its super class which is NSObject */
@@ -57,6 +62,13 @@
     //return [NSURL URLWithString:self.website];
     return [NSURL URLWithString:self.website];
 }
+
+/*- (NSURL *) ticketingURL
+{
+    //return [NSURL URLWithString:self.website];
+    return [NSURL URLWithString:self.ticketingURL];
+}
+*/
 - (NSString *) formattedDate {
     // Date Formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -64,7 +76,6 @@
     NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:posix];
     NSDate *formattedDate = [dateFormatter dateFromString:self.dateTime];
-    //[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     [dateFormatter setDateFormat:@"MMM dd yyyy 'at' hh:mm a"];
     return [dateFormatter stringFromDate:formattedDate];
 }

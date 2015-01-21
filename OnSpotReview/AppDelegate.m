@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 #import <FYX/FYX.h>
+#import <ContextCore/QLContextCoreConnector.h>
 
 
 @interface AppDelegate ()
@@ -30,6 +31,14 @@
     
     //[NSThread sleepForTimeInterval:2]; //add 5 seconds longer.
     
+    QLContextCoreConnector *connector = [QLContextCoreConnector new];
+    [connector enableFromViewController:self.window.rootViewController success:^
+     {
+         NSLog(@"Gimbal enabled");
+     } failure:^(NSError *error) {
+         NSLog(@"Failed to initialize gimbal %@", error);
+     }];
+
     return YES;
 }
 
