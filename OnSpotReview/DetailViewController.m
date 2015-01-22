@@ -44,7 +44,6 @@
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
-        //self.eventDetailLabel.text = [self.detailItem description];
     }
 }
 
@@ -64,7 +63,7 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   
+   /*
     if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
         MasterViewController *masterController = [[MasterViewController alloc]init];
         ReviewViewController *reviewController = (ReviewViewController *) segue.destinationViewController;
@@ -79,7 +78,7 @@
         //ReviewViewController *reviewController = [[ReviewViewController alloc]init];
         //reviewController.testLabelText= @"Are you there??";
 
-    }
+    }*/
     
 }
 

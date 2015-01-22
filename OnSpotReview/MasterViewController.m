@@ -294,6 +294,7 @@
         
         // What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
+    NSLog(@"In Gimbal didArrive");
    // }
 
     NSLog(@"I arrived at a Gimbal Beacon!!! %@", visit.transmitter.name);
@@ -301,7 +302,7 @@
 - (void)receivedSighting:(FYXVisit *)visit updateTime:(NSDate *)updateTime RSSI:(NSNumber *)RSSI;
 {
     // this will be invoked when an authorized transmitter is sighted during an on-going visit
-    NSLog(@"I received a sighting!!! %@", visit.transmitter.name);
+    //NSLog(@"I received a sighting!!! %@", visit.transmitter.name);
 }
 - (void)didDepart:(FYXVisit *)visit;
 {

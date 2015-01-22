@@ -70,4 +70,20 @@ Also removed all the default commented code from masterViewController.
 
 _Vamsi (01/20/2012 11:00 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.6
+Bought an apple developer account, added a device (Vamsi 4S), created a provisioining profile and added a signing authority to the code to sign and create a test build to check the code on iphone.
+Created a .ipa and uploaded it to testflight.
+Also was able to test this on Vamsi 4S, with phone connected to the mac when building the app in mac.
+Also added text views to the review view to add questions. but no content there yet.
+
+Connected the phone to the mac and tested the app on phone.
+The app shows up, whatever functionality is presented is working. Gimball beacon recognizes the phone and adds a sighting.
+
+Issues: 
+1. The review view should pop up when beacon recognizes a device Or at the least pop up an alert when device is recognized asking ghe user to review the event.
+2. All UI elements like, background images, fonts, button positions, labels, text views etc. are not scaled to different phone sizes. This needs fixing.
+
+_Vamsi (01/22/2014, 11:04 am)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 

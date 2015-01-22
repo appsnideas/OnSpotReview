@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
 // Setting the background
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
-    self.testLabel.text = self.testLabelText;
+   // self.reviewQuestion1 = ;
     
 }
 
