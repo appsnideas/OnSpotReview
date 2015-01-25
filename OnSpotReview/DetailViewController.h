@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventList.h"
 
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) EventList *detailEventList;
+
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 - (IBAction)review:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UITextView *eventDetailLabel;

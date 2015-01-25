@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnSpotReview/DetailViewController.m"
-            timestampString = "443518679.948284"
+            timestampString = "443739327.101159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "-chekIn:"
             landmarkType = "5">
          </BreakpointContent>

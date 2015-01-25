@@ -8,7 +8,7 @@
 
 #import "ReviewViewController.h"
 #import "DetailViewController.h"
-#import "MasterViewController.h"
+//#import "MasterViewController.h"
 #import "EventList.h"
 
 @interface ReviewViewController ()
@@ -17,13 +17,38 @@
 
 @implementation ReviewViewController
 
+@synthesize reviewEventList;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-// Setting the background
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
-   // self.reviewQuestion1 = ;
     
+// Setting the background
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZp.jpg"]];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    NSArray *reviewQuestionsArray = reviewEventList.reviewQuestions.allValues[0];
+    int y = 70;
+    for (NSString *reviewQuestion in reviewQuestionsArray)
+    {
+        //NSLog(@"Y Value is: %d", y);
+        //NSLog(@"%@", reviewQuestion);
+        UITextView *reviewQuestion1 = [[UITextView alloc] initWithFrame:CGRectMake(10,y,300,50)];
+        [reviewQuestion1 setFont:[UIFont systemFontOfSize:16]];
+        reviewQuestion1.userInteractionEnabled = YES;
+        reviewQuestion1.textColor = [UIColor blackColor];
+        [reviewQuestion1 setBackgroundColor: [UIColor whiteColor]];
+        [self.view addSubview:reviewQuestion1];
+// Have to figure out hw to handle null questions.
+        if (![reviewQuestion  isEqual: @"<null>"]) {
+            reviewQuestion1.text = reviewQuestion;
+            y = y+55;
+        }
+        else
+        {
+            continue;
+                
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -46,5 +46,6 @@ DetailViewController *detailController = 	(DetailViewController *) 		segue.desti
 	5. If method returns something, that value is taken into a variable of corresponding type Ex: <type> <var> = [class a method1]
 	6. when declaring methods we start with ‘-‘, then the type, then the method name with parameters. Ex: -(type)<Method Name>With<what parameters>:<list of parameters>
 	7. Properties are an easy way to declare variable, initializing them and writing setters and getters. All this is done by the compiler when you create a variable as a property. We can use 	this property in the implementation just by importing the header file (where we declared these properties)
+13. In a destination view controller, in viewDidLoad Method, [Self configureView] is important for the view to determine which elements should show up where. You should  NOT comment it out.
 
 

@@ -118,9 +118,9 @@
         }
         
 //Populating data dictionary for review questions.
-        eventLists.reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
-        eventLists.reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
-        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:eventLists.reviewQuestion, eventLists.reviewQuestionId, nil];
+        NSString *reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
+        NSString *reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
+        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:reviewQuestion,reviewQuestionId, nil];
         
 // What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
@@ -135,8 +135,12 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@\n\n%@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description, eventLists.reviewQuestions.allValues];
-        [[segue destinationViewController] setDetailItem:detailLabelText];        
+        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description];
+        [[segue destinationViewController] setDetailItem:detailLabelText];
+        [[segue destinationViewController] setDetailEventList:eventLists];
+        
+        
+        
 // Opening a web page using the URL.
         //UIApplication *application = [UIApplication sharedApplication];
         //[application openURL:eventLists.website];
@@ -288,9 +292,9 @@
         }
         
         //Populating data dictionary for review questions.
-        eventLists.reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
-        eventLists.reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
-        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:eventLists.reviewQuestion, eventLists.reviewQuestionId, nil];
+        NSString *reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
+        NSString *reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
+        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:reviewQuestion, reviewQuestionId, nil];
         
         // What exactly does this statement do??
         [self.eventList1 addObject:eventLists];

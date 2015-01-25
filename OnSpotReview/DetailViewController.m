@@ -18,12 +18,15 @@
 @end
 
 @implementation DetailViewController
+@synthesize detailEventList;
+
 - (IBAction)chekIn:(id)sender {
 }
 - (IBAction)review:(id)sender {
-    //ReviewViewController *reviewController = [[ReviewViewController alloc]init];
-    //reviewController.testLabel.text = @"Hey Are you there??";
-}
+    
+    
+    
+    }
 
 #pragma mark - Managing the detail item
 
@@ -49,10 +52,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Setting the background
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZ.jpg"]];
+//Setting back ground color as our image
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZp.jpg"]];
+// Adding event image on the top. This is currently hardcoded. This has to come from JSON.
+    UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,60,320,80)];
+    eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];
+    [self.view addSubview:eventImageView];
     [self configureView];
+// Here we have to check if we can add a textview instead of label.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,24 +70,12 @@
 
 #pragma mark - Segues
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   /*
-    if ([[segue identifier] isEqualToString:@"reviewDetail"]) {
-        MasterViewController *masterController = [[MasterViewController alloc]init];
-        ReviewViewController *reviewController = (ReviewViewController *) segue.destinationViewController;
-        //MasterViewController *masterController = (MasterViewController *) segue.destinationViewController;
-        //EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-        NSIndexPath *indexPath = [masterController.tableView indexPathForSelectedRow];
-        reviewController.testLabelText = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        NSLog(@"Row Selected: %ld",indexPath.row);
-     
-    
-        //NSLog([NSString stringWithFormat:@"%ld",(long)indexPath.row]);
-        //ReviewViewController *reviewController = [[ReviewViewController alloc]init];
-        //reviewController.testLabelText= @"Are you there??";
-
-    }*/
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"reviewDetail"])
+    {
+        [[segue destinationViewController] setReviewEventList:self.detailEventList];
+    }
 }
 
 @end

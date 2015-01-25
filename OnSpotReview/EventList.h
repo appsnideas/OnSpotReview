@@ -32,9 +32,6 @@
 @property (nonatomic, strong) NSString *website;
 //@property (nonatomic, strong) NSURL *ticketingURL;
 @property (nonatomic, strong) NSArray *ticketingURL;
-@property (nonatomic,strong) NSString *reviewQuestionsArray;
-@property (nonatomic, strong) NSString *reviewQuestionId;
-@property (nonatomic, strong) NSString *reviewQuestion;
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *latitude;
 

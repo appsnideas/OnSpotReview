@@ -32,9 +32,9 @@
 @synthesize latitude;
 @synthesize reviewQuestions;
 @synthesize reviewAnswers;
-@synthesize reviewQuestionsArray;
-@synthesize reviewQuestionId;
-@synthesize reviewQuestion;
+//@synthesize reviewQuestionsArray;
+//@synthesize reviewQuestionId;
+//@synthesize reviewQuestion;
 
 /* Here in the .m, we initialize the designated Initializer
  We declare/initialize "Self" indicating self is this class and its super class which is NSObject */

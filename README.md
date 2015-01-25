@@ -85,5 +85,16 @@ Issues:
 
 _Vamsi (01/22/2014, 11:04 am)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.7
+All UI elements like, background images, fonts, button positions, labels, text views etc. are now programatically created.
+All reviw question are being populated in text views in review View Controller.
+
+Pending:
+Adding Star rating to the questions.
+Adding submit logic that creates a answers JSON
+Adding this code to gimball pop up menu.
+
+_Vamsi (Jan 25th 2015, 01:20 AM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
