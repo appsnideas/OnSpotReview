@@ -10,6 +10,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "EventList.h"
+#import "OnSpotUtilities.h"
 
 // *********************    Gimbal Related...   *********************************
 #import <FYX/FYX.h>
@@ -43,7 +44,6 @@
 
 // Setting the background
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vAGZp.jpg"]]];
-
 // Grabbing data from URL
     NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents"];
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
@@ -178,6 +178,8 @@
      }*/
     
 // Beautify the cells by adding color and alternating.
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.textColor = [UIColor blueColor];
     static NSString *cellIdentifier = @"DefaultCell";
     if (cell==nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];

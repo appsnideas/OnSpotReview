@@ -12,6 +12,7 @@
 #import "EventList.h"
 #import "Foundation/Foundation.h"
 #import "UIKit/UIKitDefines.h"
+#import "OnSpotUtilities.h"
 
 @interface DetailViewController ()
 
@@ -54,6 +55,8 @@
     [super viewDidLoad];
 //Setting back ground color as our image
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"vAGZp.jpg"]];
+    self.detailDescriptionLabel.textColor = [UIColor blackColor];
+    //self.detailDescriptionLabel.font = UIfon
 // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
     UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,60,320,80)];
     eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];

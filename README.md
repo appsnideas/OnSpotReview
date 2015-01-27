@@ -96,5 +96,10 @@ Adding this code to gimball pop up menu.
 
 _Vamsi (Jan 25th 2015, 01:20 AM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.8
+Implemented backgrounds from Srujana
+Added questions and Review stars
+Added new project DLStar Rating.
 
+_Vamsi (Jan 26 2015 11:20 PM)
 
