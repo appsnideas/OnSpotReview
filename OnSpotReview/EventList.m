@@ -31,7 +31,7 @@
 @synthesize longitude;
 @synthesize latitude;
 @synthesize reviewQuestions;
-@synthesize reviewAnswers;
+//@synthesize reviewAnswers;
 //@synthesize reviewQuestionsArray;
 //@synthesize reviewQuestionId;
 //@synthesize reviewQuestion;

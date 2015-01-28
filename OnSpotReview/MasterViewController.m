@@ -43,7 +43,13 @@
 // *********************    Gimbal Related...   *****************************************************
 
 // Setting the background
-    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vAGZp.jpg"]]];
+    
+//Yellow Gradient
+    //[self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"YellowBG.jpg"]]];
+    
+//Blue Gradient
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlueBG.jpg"]]];
+    
 // Grabbing data from URL
     NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents"];
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
@@ -178,8 +184,9 @@
      }*/
     
 // Beautify the cells by adding color and alternating.
-    cell.textLabel.textColor = [UIColor blackColor];
-    cell.detailTextLabel.textColor = [UIColor blueColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+    cell.detailTextLabel.textColor = [UIColor greenColor];
     static NSString *cellIdentifier = @"DefaultCell";
     if (cell==nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];

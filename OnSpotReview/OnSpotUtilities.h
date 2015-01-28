@@ -12,5 +12,7 @@
 @interface OnSpotUtilities : NSObject
 
 + (UIColor*)colorWithHexString:(NSString*)hex;
++ (void)setMasterBGColor:(UITableViewController *)masterController;
++ (void)setBGColor: (UIViewController *)viewController;
 
 @end

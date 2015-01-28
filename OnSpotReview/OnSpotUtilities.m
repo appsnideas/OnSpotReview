@@ -46,5 +46,17 @@
                            alpha:1.0f];
 }
 
++(void) setMasterBGColor:(UITableViewController *)masterController;{
+    
+    [masterController.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"YellowBG.jpg"]]];
+    
+}
+
++(void) setBGColor:(UIViewController *)viewController;{
+    
+    viewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
+    
+}
+
 
 @end

@@ -102,4 +102,14 @@ Added questions and Review stars
 Added new project DLStar Rating.
 
 _Vamsi (Jan 26 2015 11:20 PM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.9
+Added code to gather the rating data.
+
+Pending:
+========
+Need to create a JSON for this rating data and send it back to server.
+Detail screen data has to go in a table to be presentable
+minor color chages.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -37,7 +37,7 @@
 
 // Review Questions dictionary
 @property (nonatomic, strong) NSDictionary *reviewQuestions;
-@property (nonatomic, strong) NSDictionary *reviewAnswers;
+//@property (nonatomic, strong) NSDictionary *reviewAnswers;
 
 
 /*  Designated Initializer - This is used to initialize the instance of the class (object) - ex: init

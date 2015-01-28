@@ -29,7 +29,7 @@
      put on the top of application:didFinishLaunchingWithOptions, so it will not
      proceed to show window until sleep interval is finished.*/
     
-    //[NSThread sleepForTimeInterval:2]; //add 5 seconds longer.
+    //[NSThread sleepForTimeInterval:5]; //add 5 seconds longer.
     
     QLContextCoreConnector *connector = [QLContextCoreConnector new];
     [connector enableFromViewController:self.window.rootViewController success:^
