@@ -31,7 +31,6 @@
     //[ratings init];
 // Yellow gradient Bakground
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
-    
 // Blue gradient Bakground
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     
@@ -95,7 +94,7 @@
                 
         }*/
     }
-    
+// Adding Submmit button and setting UI parameters.
     UIButton *submit= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submit addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [submit setFrame:CGRectMake(90, 455, 140, 40)];
@@ -103,30 +102,69 @@
     [submit setExclusiveTouch:YES];
     submit.layer.cornerRadius = 1;
     submit.layer.borderWidth = 1;
-    //submit.layer.borderColor = [UIColor blueColor].CGColor;
-    submit.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"];
+    submit.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
     [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.view addSubview:submit];
 }
 
-// Adding Submit Buton
+//  Submit Buton Action - Collecting the ratings, Creating JSON and posting it to server.
 - (void) buttonClicked:(UIButton*)sender
 {
-   // NSLog(@"Count%lu", (unsigned long)ratings.count);
-   // NSLog(@"All Keys: %@",ratings.allKeys);
-   // NSLog(@"All Values: %@",ratings.allValues);
+// Creating the jSON Mutable String which can be appended with exact format as needed by server.
+    
+    NSData *jsonData = [[NSData alloc]init]; // Declaring NSData object for jSON.
+    NSMutableString *jsonString = [[NSMutableString alloc]initWithString:@"{\"answers\":["]; // Declaring and initiating the jSON String.
+    int count = 0; // Counter to control the ending elements of JSON.
     for(NSString * key in ratingValues.allKeys)
     {
-        NSLog(@"Question: %@ -> Rating: %@",key, [NSString stringWithFormat:@"%@",[ratingValues valueForKey:key]]);
+        //NSLog(@"Question: %@ -> Rating: %@",key, [NSString stringWithFormat:@"%@",[ratingValues valueForKey:key]]);
+        ++count;
+        if(count == [ratingValues count])
+            [jsonString appendString:[NSString stringWithFormat:@"{\"question\":\"%@\",\"answer\":\"%@\"}",key,[ratingValues valueForKey:key]]];
+        else
+            [jsonString appendString:[NSString stringWithFormat:@"{\"question\":\"%@\",\"answer\":\"%@\"},",key,[ratingValues valueForKey:key]]];
+        
+    }
+    [jsonString appendString:@"],"];
+    [jsonString appendString:[NSString stringWithFormat:@"\"deviceID\":\"%@\"}",[OnSpotUtilities idForVendor]]];
+    NSString *eventId = reviewEventList.eventId;
+// End of jSON string creation. below is getting event ID.
+
+//jSON post - Creating Json (NS)Data from the above string and URL from Data.
+    jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    //NSString *strData = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //NSLog(@"JSON Data%@", strData);
+    NSString *urlString = [NSString stringWithFormat:@"https://damp-journey-8712.herokuapp.com/osrevents/%@/osreventreviews", eventId];
+    NSURL *reviewURL = [NSURL URLWithString:urlString];
+  // Creating request and posting to server.
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reviewURL];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: jsonData];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+  // Getting response from server for the posted data.
+    NSError *errorReturned = nil;
+    NSURLResponse *theResponse =[[NSURLResponse alloc]init];
+    //NSLog(@"Request: %@", request);
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&theResponse error:&errorReturned];
+    
+    if (errorReturned) {
+        NSLog(@"Error: %@, Response: %@",errorReturned, theResponse);
+    }
+    else
+    {
+        NSError *jsonParsingError = nil;
+        NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&jsonParsingError];
     }
     
 }
+// End JSON Post and button click code
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+// DLStar rating project to use the stars and get the values
 -(void)newRating:(DLStarRatingControl *)control :(float)rating {
     NSValue *myKey = [NSValue valueWithNonretainedObject:control];
     NSString * reviewQuestion = [ratings objectForKey:myKey];

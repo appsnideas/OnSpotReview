@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableDictionary *ratings;
 @property (strong, nonatomic) NSMutableDictionary *ratingValues;
 
+
 //@property (strong, nonatomic) IBOutlet UITextView *reviewQuestion1;
 //@property (strong, nonatomic) IBOutlet UITextView *reviewQuestion2;
 //@property (strong, nonatomic) IBOutlet UITextView *reviewQuestion3;

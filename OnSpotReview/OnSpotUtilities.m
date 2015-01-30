@@ -7,6 +7,9 @@
 //
 
 #import "OnSpotUtilities.h"
+@import UIKit;
+#import <UIKit/UIKit.h>
+#import <uuid/uuid.h>
 
 @implementation OnSpotUtilities
 
@@ -58,5 +61,11 @@
     
 }
 
+
++ (NSString *) idForVendor
+{
+    return [[UIDevice currentDevice].identifierForVendor UUIDString];
+    
+}
 
 @end

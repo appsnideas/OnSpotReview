@@ -11,6 +11,7 @@
 
 @interface OnSpotUtilities : NSObject
 
++ (NSString *) idForVendor;
 + (UIColor*)colorWithHexString:(NSString*)hex;
 + (void)setMasterBGColor:(UITableViewController *)masterController;
 + (void)setBGColor: (UIViewController *)viewController;

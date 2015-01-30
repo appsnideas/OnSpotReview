@@ -124,3 +124,19 @@ See if better colors are available for Review View.
 
 _Vamsi (Jan 29th 2015 7:10 PM))
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 2.0
+Completed Creating jSON for the ratings data..
+Completed posting to the server. Successfully tested that server is receiving the post.
+
+- A Major release in the sense that app is submission ready 1.0
+
+Pending:
+Add a "Thank you alert" after user submits the review. If possible give the count of the number of reviews submitted so far (you can get this in the response of the post)
+Check if the review view controller can be scrollable so that we can add more questions.
+Web View Text color change.
+See if better colors are available for Review View.
+
+_Vamsi (Jan 30th 2015 12:15 pm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
