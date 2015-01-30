@@ -107,9 +107,20 @@ OnSpotReview v 1.9
 Added code to gather the rating data.
 
 Pending:
-========
 Need to create a JSON for this rating data and send it back to server.
 Detail screen data has to go in a table to be presentable
-minor color chages.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+minor color changes.
 
+_Vamsi (Jan 28th 2015 01:30 am)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 1.10
+Completed populating the event details in a table.
+Created a Web View in the detail view and populated the data in a table.
+
+Pending:
+Create JSON for the rating and post it to server.
+Web View Text color change.
+See if better colors are available for Review View.
+
+_Vamsi (Jan 29th 2015 7:10 PM))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

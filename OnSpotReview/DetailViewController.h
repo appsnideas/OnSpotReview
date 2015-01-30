@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "EventList.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UITextFieldDelegate, UIWebViewDelegate>
 
+@property (nonatomic, retain) UIWebView *myWebView;
 @property (strong, nonatomic) id detailItem;
 @property (strong, nonatomic) EventList *detailEventList;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

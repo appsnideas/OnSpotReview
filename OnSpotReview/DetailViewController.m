@@ -21,65 +21,60 @@
 @implementation DetailViewController
 @synthesize detailEventList;
 
-//- (IBAction)chekIn:(id)sender {
-//}
-- (IBAction)review:(id)sender {
-}
+//- (IBAction)chekIn:(id)sender { }
+- (IBAction)review:(id)sender { }
 
 #pragma mark - Managing the detail item
-
-- (void)setDetailItem:(id)newDetailItem {
+/*
+- (void)setDetailItem:(id)newDetailItem
+{
     
-    if (_detailItem != newDetailItem) {
+    if (_detailItem != newDetailItem)
+    {
         _detailItem = newDetailItem;
-        
-        // Update the view.
-        //[self configureView];
+       // [self configureView];
     }
 }
-
-- (void)configureView {
-    // Update the user interface for the detail item.
-    if (self.detailItem) {
+*/
+- (void)configureView
+{/*
+// Update the user interface for the detail item.
+    if (self.detailItem)
+    {
         self.detailDescriptionLabel.text = [self.detailItem description];
-    }
+    }*/
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-//Setting view parameters
+
+// Adding a UI WebView in Detail View to post event detail data.
+    self.myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 100, 320,350)];
+    self.myWebView.opaque = NO;
+    self.myWebView.backgroundColor = [UIColor clearColor];
+    //self.myWebView.scalesPageToFit = YES;
+    //self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    self.myWebView.delegate = self;
+    [self.view addSubview:self.myWebView];
     
-// Yellow gradient Bakground
+// Adding Event Details in a table and dumping it on the above webView
+    NSString *html = [NSString stringWithFormat:@"<html><table border = 1 rules=rows><tr><td width=35%% color=\"white\"><b><i>Event Name</i></b></td><td>%@</td></tr><tr><td><b><i>Venue</i></b></td><td>%@</td></tr><tr><td><b><i>Date & Time</i></b></td><td>%@</td></tr><tr><td><b><i>Website</i></b></td><td>%@</td></tr><tr><td><b><i>Description</i></b></td><td>%@</td></tr></table></html>",detailEventList.eventName,detailEventList.address,[detailEventList formattedDate],detailEventList.website,detailEventList.description];
+    [self.myWebView loadHTMLString:html baseURL:detailEventList.websiteURL];
+// End Event Details Table
+    
+//Setting UI Parameters
+  // Yellow gradient Bakground
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
-    
-// Blue gradient Bakground
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];\
-    
+  // Blue gradient Bakground
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     self.detailDescriptionLabel.textColor = [UIColor whiteColor];
-    //self.detailDescriptionLabel.font = UIfon
-    
-// Adding event image on the top. This is currently hardcoded. This has to come from JSON.
-    //UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,60,320,80)];
+  // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
     UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,80)];
     eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];
     [self.view addSubview:eventImageView];
     [self configureView];
-/*
-// Button Customization
-    UIButton *review= [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [review addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [review setFrame:CGRectMake(90, 400, 140, 40)];
-    [review setTitle:@"Review" forState:UIControlStateNormal];
-    [review setExclusiveTouch:YES];
-    review.layer.cornerRadius = 5;
-    review.layer.borderWidth = 2;
-    //submit.layer.borderColor = [UIColor blueColor].CGColor;
-    review.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"];
-    [review setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view addSubview:review];
-*/
-    
-// Here we have to check if we can add a textview instead of label.
+// End SAetting UI Parameters
     
 }
 
@@ -88,10 +83,8 @@
     
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Segues

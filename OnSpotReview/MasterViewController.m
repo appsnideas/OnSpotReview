@@ -127,8 +127,6 @@
         NSString *reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
         NSString *reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
         eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:reviewQuestion,reviewQuestionId, nil];
-        
-// What exactly does this statement do??
         [self.eventList1 addObject:eventLists];
     }
 }
@@ -141,16 +139,8 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
-        NSString *detailLabelText = [NSString stringWithFormat:@"Event Name: %@\nVenue: %@\nDate & Time: %@\nWebsite: %@\n\nDescription: %@", eventLists.eventName,eventLists.address,[eventLists formattedDate],eventLists.website, eventLists.description];
-        [[segue destinationViewController] setDetailItem:detailLabelText];
+    // Passing eventLists EventList Object to Detail View controller
         [[segue destinationViewController] setDetailEventList:eventLists];
-        
-        
-        
-// Opening a web page using the URL.
-        //UIApplication *application = [UIApplication sharedApplication];
-        //[application openURL:eventLists.website];
-
     }
 }
 
@@ -172,26 +162,18 @@
     EventList *eventLists = [self.eventList1 objectAtIndex:indexPath.row];
     cell.textLabel.text = eventLists.eventName;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@",[eventLists formattedDate]];
-   /*
-// If we need to create a image URL then we need the following code.
-    if ( [eventLists.thumbnail isKindOfClass:[NSString class]]) {
-     //NSData *imageData = [NSData dataWithContentsOfURL:eventLists.thumbnailURL];
-        NSData *imageData = [NSData dataWithContentsOfFile:@"/Users/vamsi/Apps/OnSpotReview/images/Swaram_Small.jpg"];
-     UIImage *image = [UIImage imageWithData:imageData];
-     cell.imageView.image = image;
-     } else{
-     cell.imageView.image = [UIImage imageNamed:@"ReviewIcon2.jpeg"];
-     }*/
     
 // Beautify the cells by adding color and alternating.
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
     cell.detailTextLabel.textColor = [UIColor greenColor];
     static NSString *cellIdentifier = @"DefaultCell";
-    if (cell==nil){
+    if (cell==nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    if (indexPath.row % 2) {
+    if (indexPath.row % 2)
+    {
         UIColor *altCellColor = [UIColor colorWithWhite:0 alpha:0.15];
         cell.backgroundColor = altCellColor;
     }
@@ -327,10 +309,3 @@
 // *********************    Gimbal Related...   *********************************
 
 @end
-    
-// Code for review questions. Not being used now but saving here just in case.
-/* for (NSDictionary [eventLists.reviewQuestions] in eventLists.reviewQuestionsArray)
- {
- eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:[eventDictionary valueForKeyPath:@"reviewquestions.question"],[eventDictionary valueForKeyPath:@"reviewquestions.id"], nil];
- }*/
-

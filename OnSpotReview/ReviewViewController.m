@@ -45,13 +45,13 @@
         UITextView *reviewQuestion1 = [[UITextView alloc] initWithFrame:CGRectMake(0,quesY,320,70)];
         //[reviewQuestion1 setFont:[UIFont systemFontOfSize:20]];
         reviewQuestion1.userInteractionEnabled = NO;
-        reviewQuestion1.textColor = [UIColor blackColor];
+        reviewQuestion1.textColor = [UIColor whiteColor];
         reviewQuestion1.font = [UIFont boldSystemFontOfSize:18];
         reviewQuestion1.font = [UIFont italicSystemFontOfSize:18];
 //Yellow Gradient
         //[reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
-        [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C143FB"]];
+        [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
         [self.view addSubview:reviewQuestion1];
         reviewQuestion1.text = reviewQuestion;
         
@@ -61,7 +61,7 @@
 //Yellow Gradient
        // [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
-        [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C143FB"]];
+        [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
         [self.view addSubview:ratingControl];
         quesY = quesY+111;
         sliderY = sliderY+111;
@@ -75,7 +75,7 @@
 //yellow Gradient
            // UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"EACB44"];
 // Blue Gradient
-            UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"C36DFC"];
+            UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"D46BFA"];
             reviewQuestion1.backgroundColor = altCellColor;
             ratingControl.backgroundColor = altCellColor;
         }
@@ -112,12 +112,12 @@
 // Adding Submit Buton
 - (void) buttonClicked:(UIButton*)sender
 {
-    NSLog(@"Count%lu", (unsigned long)ratings.count);
-    NSLog(@"All Keys: %@",ratings.allKeys);
-    NSLog(@"All Values: %@",ratings.allValues);
+   // NSLog(@"Count%lu", (unsigned long)ratings.count);
+   // NSLog(@"All Keys: %@",ratings.allKeys);
+   // NSLog(@"All Values: %@",ratings.allValues);
     for(NSString * key in ratingValues.allKeys)
     {
-        NSLog(@"Question: %@ -> Rating: %@",key, [ratingValues valueForKey:key]);
+        NSLog(@"Question: %@ -> Rating: %@",key, [NSString stringWithFormat:@"%@",[ratingValues valueForKey:key]]);
     }
     
 }
@@ -133,30 +133,5 @@
     [ratingValues setValue:[NSNumber numberWithFloat:rating] forKey:reviewQuestion];
     
 }
-
-/*****************      Unused but useful code  **********************************/
-
-/*
--(void)boldFontForLabel:(UITextView *)revQuestion1{
-    UIFont *currentFont = revQuestion1.font;
-    UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold",currentFont.fontName] size:currentFont.pointSize];
-    revQuestion1.font = newFont;
-}
-
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- 
--(void)sliderAction:(id)sender
-{
-    UISlider *slider = (UISlider*)sender;
-    float value = slider.value;
-
-}
-*/
 
 @end
