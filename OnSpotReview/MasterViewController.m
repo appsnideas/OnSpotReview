@@ -45,10 +45,10 @@
 // Setting the background
     
 //Yellow Gradient
-    //[self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"YellowBG.jpg"]]];
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"YellowBG.jpg"]]];
     
 //Blue Gradient
-    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlueBG.jpg"]]];
+    //[self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlueBG.jpg"]]];
     
 // Grabbing data from URL
     NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents"];
@@ -69,56 +69,32 @@
     {
         EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
         
-        if ([eventDictionary objectForKey:@"address"] == NULL)
-        {
-            eventLists.address = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"address"] != NULL)
         {
             eventLists.address = [eventDictionary objectForKey:@"address"];
         }
         
-        if ([eventDictionary objectForKey:@"description"] == NULL)
-        {
-            eventLists.description = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"description"] != NULL)
         {
             eventLists.description = [eventDictionary objectForKey:@"description"];
         }
         
-        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL)
-        {
-            eventLists.dateTime = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"eventDateAndTime"] != NULL)
         {
             eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
         }
         
-        if ([eventDictionary objectForKey:@"_id"] == NULL)
-        {
-            eventLists.eventId = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"_id"] != NULL)
         {
              eventLists.eventId = [eventDictionary objectForKey:@"_id"];
         }
         
-        if ([eventDictionary objectForKey:@"website"] == NULL)
-        {
-            eventLists.website = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"website"] != NULL)
         {
             eventLists.website = [eventDictionary objectForKey:@"website"];
         }
         
-        if ([eventDictionary objectForKey:@"ticketingurl"] == NULL)
-        {
-            eventLists.ticketingURL = NULL;
-        }
-        else
+        if ([eventDictionary objectForKey:@"ticketingurl"] != NULL)
         {
             eventLists.ticketingURL = [eventDictionary valueForKeyPath:@"ticketingurl.ticketingurl"];
         }
@@ -164,9 +140,12 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Date: %@",[eventLists formattedDate]];
     
 // Beautify the cells by adding color and alternating.
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
-    cell.detailTextLabel.textColor = [UIColor greenColor];
+    cell.textLabel.textColor = [UIColor brownColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+    cell.detailTextLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:10];
+    cell.detailTextLabel.shadowColor = [UIColor blackColor];
+    cell.detailTextLabel.shadowOffset = CGSizeMake(0,0);
     static NSString *cellIdentifier = @"DefaultCell";
     if (cell==nil)
     {

@@ -152,3 +152,9 @@ Scroll feature for review screen not working - Review screen is UIText Views (On
 _Vamsi (Jan 30th 8:40 pm)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+_Narayanan (Jan 31st 2:00AM)
+
+Fixed the ReviewController to put everything into a UIScrollView. All questions show up fine now and can be 
+submitted with button at the bottom.
+
+
