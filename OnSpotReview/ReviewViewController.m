@@ -34,7 +34,6 @@
 // Blue gradient Bakground
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     NSArray *reviewQuestionsArray = reviewEventList.reviewQuestions.allValues[0];
     int quesY = 0; //y = 70 (Was the previous start)
     int sliderY = 55;
@@ -42,11 +41,10 @@
     for (NSString *reviewQuestion in reviewQuestionsArray)
     {
         UITextView *reviewQuestion1 = [[UITextView alloc] initWithFrame:CGRectMake(0,quesY,320,70)];
-        //[reviewQuestion1 setFont:[UIFont systemFontOfSize:20]];
-        reviewQuestion1.userInteractionEnabled = NO;
         reviewQuestion1.textColor = [UIColor whiteColor];
         reviewQuestion1.font = [UIFont boldSystemFontOfSize:18];
         reviewQuestion1.font = [UIFont italicSystemFontOfSize:18];
+        reviewQuestion1.autoresizesSubviews = YES;
 //Yellow Gradient
         //[reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
@@ -69,7 +67,6 @@
         [ratings setObject:reviewQuestion forKey:myKey];
         [ratingValues setValue:[NSNumber numberWithFloat:0.0] forKey:reviewQuestion];
         
-
         if (cnt % 2) {
 //yellow Gradient
            // UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"EACB44"];
@@ -110,8 +107,18 @@
 //  Submit Buton Action - Collecting the ratings, Creating JSON and posting it to server.
 - (void) buttonClicked:(UIButton*)sender
 {
-// Creating the jSON Mutable String which can be appended with exact format as needed by server.
     
+//
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Thank you for submitting the review. You helped us in a great way!!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
+    [alert show];
+   // [alert release];
+    
+    
+// Creating the jSON Mutable String which can be appended with exact format as needed by server.
     NSData *jsonData = [[NSData alloc]init]; // Declaring NSData object for jSON.
     NSMutableString *jsonString = [[NSMutableString alloc]initWithString:@"{\"answers\":["]; // Declaring and initiating the jSON String.
     int count = 0; // Counter to control the ending elements of JSON.

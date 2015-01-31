@@ -25,7 +25,7 @@
 - (IBAction)review:(id)sender { }
 
 #pragma mark - Managing the detail item
-/*
+
 - (void)setDetailItem:(id)newDetailItem
 {
     
@@ -35,7 +35,7 @@
        // [self configureView];
     }
 }
-*/
+
 - (void)configureView
 {/*
 // Update the user interface for the detail item.
@@ -49,12 +49,15 @@
 {
     [super viewDidLoad];
 
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.view.userInteractionEnabled = YES;
+    
 // Adding a UI WebView in Detail View to post event detail data.
     self.myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 100, 320,350)];
     self.myWebView.opaque = NO;
     self.myWebView.backgroundColor = [UIColor clearColor];
-    //self.myWebView.scalesPageToFit = YES;
-    //self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    //self.myWebView.scalesPageToFit = TRUE;
+    self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.myWebView.delegate = self;
     [self.view addSubview:self.myWebView];
     
@@ -68,19 +71,30 @@
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
   // Blue gradient Bakground
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
-    self.detailDescriptionLabel.textColor = [UIColor whiteColor];
+    //self.detailDescriptionLabel.textColor = [UIColor whiteColor];
   // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
     UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,80)];
     eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];
     [self.view addSubview:eventImageView];
     [self configureView];
-// End SAetting UI Parameters
-    
+// End Setting UI Parameters
+
+// Adding Review button programatically
+    UIButton *review= [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [review addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [review setFrame:CGRectMake(90, 455, 140, 40)];
+    [review setTitle:@"Review" forState:UIControlStateNormal];
+    [review setExclusiveTouch:YES];
+    review.layer.cornerRadius = 1;
+    review.layer.borderWidth = 1;
+    review.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
+    [review setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:review];
 }
 
 - (void) buttonClicked:(UIButton*)sender
 {
-    
+    [self performSegueWithIdentifier:@"reviewDetail" sender:sender];
 }
 
 - (void)didReceiveMemoryWarning {

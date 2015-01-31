@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UITextView *eventDetailLabel;
 
-- (IBAction)review:(UIButton *)sender;
+//- (IBAction)review:(UIButton *)sender;
 
 @end
 

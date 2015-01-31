@@ -140,3 +140,15 @@ See if better colors are available for Review View.
 _Vamsi (Jan 30th 2015 12:15 pm)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 2.1
+
+Added Alert to Thank the user for the feedback.
+
+Pending:
+The views are not auto scaling to the size of the iPhone. Though Auto layout is selected in the storyboard
+Scroll feature for detail screen not working - Detail screen is UIWebView over a regular view.
+Scroll feature for review screen not working - Review screen is UIText Views (One for question and one for star ratings) over a regular view.
+
+_Vamsi (Jan 30th 8:40 pm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
