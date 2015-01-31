@@ -12,6 +12,7 @@
 #import "EventList.h"
 #import "DLStarRatingControl.h"
 #import "OnSpotUtilities.h"
+#import "MasterViewController.h"
 
 @interface ReviewViewController ()
 
@@ -121,16 +122,6 @@
 - (void) buttonClicked:(UIButton*)sender
 {
     
-//
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Thank you for submitting the review. You helped us in a great way!!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Dismiss"
-                                          otherButtonTitles:nil];
-    [alert show];
-   // [alert release];
-    
-    
 // Creating the jSON Mutable String which can be appended with exact format as needed by server.
     NSData *jsonData = [[NSData alloc]init]; // Declaring NSData object for jSON.
     NSMutableString *jsonString = [[NSMutableString alloc]initWithString:@"{\"answers\":["]; // Declaring and initiating the jSON String.
@@ -176,6 +167,24 @@
         NSError *jsonParsingError = nil;
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&jsonParsingError];
     }
+    
+//
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Thank you for submitting the review. You helped us in a great way!!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    UIStoryboard * storyboard = self.storyboard;
+    MasterViewController *add =
+    [storyboard instantiateViewControllerWithIdentifier:@"NavigationControler"];
+    
+    [self presentViewController:add
+                       animated:YES
+                     completion:nil];
+    // [alert release];
+
     
 }
 // End JSON Post and button click code

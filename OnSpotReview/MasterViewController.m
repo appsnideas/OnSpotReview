@@ -142,10 +142,9 @@
 // Beautify the cells by adding color and alternating.
     cell.textLabel.textColor = [UIColor brownColor];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-    cell.detailTextLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:10];
-    cell.detailTextLabel.shadowColor = [UIColor blackColor];
-    cell.detailTextLabel.shadowOffset = CGSizeMake(0,0);
+
     static NSString *cellIdentifier = @"DefaultCell";
     if (cell==nil)
     {

@@ -52,6 +52,11 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+    //[ratings init];
+    
+    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                               self.view.frame.size.width,
+                                                                               self.view.frame.size.height)];
 
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.view.userInteractionEnabled = YES;
@@ -63,7 +68,8 @@
     //self.myWebView.scalesPageToFit = TRUE;
     self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.myWebView.delegate = self;
-    [self.view addSubview:self.myWebView];
+    [scrollView addSubview:self.myWebView];
+    
     
 // Adding Event Details in a table and dumping it on the above webView
     NSString *html = [NSString stringWithFormat:@"<html><table border = 1 rules=rows><tr><td width=35%% color=\"white\"><b><i>Event Name</i></b></td><td>%@</td></tr><tr><td><b><i>Venue</i></b></td><td>%@</td></tr><tr><td><b><i>Date & Time</i></b></td><td>%@</td></tr><tr><td><b><i>Website</i></b></td><td>%@</td></tr><tr><td><b><i>Description</i></b></td><td>%@</td></tr></table></html>",detailEventList.eventName,detailEventList.address,[detailEventList formattedDate],detailEventList.website,detailEventList.description];
@@ -79,7 +85,7 @@
   // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
     UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,screenWidth,80)];
     eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];
-    [self.view addSubview:eventImageView];
+    [scrollView addSubview:eventImageView];
     [self configureView];
 // End Setting UI Parameters
 
@@ -93,7 +99,9 @@
     review.layer.borderWidth = 1;
     review.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
     [review setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view addSubview:review];
+    [scrollView addSubview:review];
+    scrollView.contentSize = CGSizeMake(screenWidth, 600);
+    [self.view addSubview:scrollView];
 }
 
 - (void) buttonClicked:(UIButton*)sender

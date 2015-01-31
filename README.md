@@ -151,10 +151,19 @@ Scroll feature for review screen not working - Review screen is UIText Views (On
 
 _Vamsi (Jan 30th 8:40 pm)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+OnSpotReview  (NR Branch)
 _Narayanan (Jan 31st 2:00AM)
 
 Fixed the ReviewController to put everything into a UIScrollView. All questions show up fine now and can be 
 submitted with button at the bottom.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 2.2
 
+Merged NR branch (Narayanan's changes) to the master.
+Added scrollview to the detail view.
+Sizes issues is also resolved. Now it works for all size phones.
+Added code to come back to event list when review alert is dismissed.
+
+_Vamsi (Jan 31st 3:00 PM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
