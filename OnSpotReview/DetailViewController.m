@@ -48,14 +48,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
 
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.view.userInteractionEnabled = YES;
     
 // Adding a UI WebView in Detail View to post event detail data.
-    self.myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 100, 320,350)];
+    self.myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 100, screenWidth,350)];
     self.myWebView.opaque = NO;
-    self.myWebView.backgroundColor = [UIColor clearColor];
+    [self.myWebView setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
     //self.myWebView.scalesPageToFit = TRUE;
     self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.myWebView.delegate = self;
@@ -73,7 +77,7 @@
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     //self.detailDescriptionLabel.textColor = [UIColor whiteColor];
   // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
-    UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,80)];
+    UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,screenWidth,80)];
     eventImageView.image=[UIImage imageNamed:@"SwaramGoldSpot.jpg"];
     [self.view addSubview:eventImageView];
     [self configureView];
@@ -82,7 +86,7 @@
 // Adding Review button programatically
     UIButton *review= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [review addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [review setFrame:CGRectMake(90, 455, 140, 40)];
+    [review setFrame:CGRectMake(screenWidth/2-70, 455, 140, 40)];
     [review setTitle:@"Review" forState:UIControlStateNormal];
     [review setExclusiveTouch:YES];
     review.layer.cornerRadius = 1;

@@ -22,16 +22,12 @@
 @synthesize reviewEventList;
 @synthesize ratings;
 @synthesize ratingValues;
-@synthesize reviewQuestions;
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     ratings = [NSMutableDictionary new];
     ratingValues = [NSMutableDictionary new];
-    reviewQuestions = reviewEventList.reviewQuestions.allValues[0];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
