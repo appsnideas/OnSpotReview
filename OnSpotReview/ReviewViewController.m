@@ -22,17 +22,30 @@
 @synthesize reviewEventList;
 @synthesize ratings;
 @synthesize ratingValues;
+@synthesize reviewQuestions;
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     ratings = [NSMutableDictionary new];
     ratingValues = [NSMutableDictionary new];
+    reviewQuestions = reviewEventList.reviewQuestions.allValues[0];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
     //[ratings init];
+    
+    UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                               self.view.frame.size.width,
+                                                                               self.view.frame.size.height)];
+
 // Yellow gradient Bakground
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
 // Blue gradient Bakground
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     
     NSArray *reviewQuestionsArray = reviewEventList.reviewQuestions.allValues[0];
     int quesY = 0; //y = 70 (Was the previous start)
@@ -40,26 +53,26 @@
     int cnt = 0;
     for (NSString *reviewQuestion in reviewQuestionsArray)
     {
-        UITextView *reviewQuestion1 = [[UITextView alloc] initWithFrame:CGRectMake(0,quesY,320,70)];
-        reviewQuestion1.textColor = [UIColor whiteColor];
+        UITextView *reviewQuestion1 = [[UITextView alloc] initWithFrame:CGRectMake(0,quesY,screenWidth,70)];
+        reviewQuestion1.textColor = [UIColor blackColor];
         reviewQuestion1.font = [UIFont boldSystemFontOfSize:18];
         reviewQuestion1.font = [UIFont italicSystemFontOfSize:18];
         reviewQuestion1.autoresizesSubviews = YES;
 //Yellow Gradient
-        //[reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
+        [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
-        [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
-        [self.view addSubview:reviewQuestion1];
+        //[reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
+        [scrollView addSubview:reviewQuestion1];
         reviewQuestion1.text = reviewQuestion;
         
-        DLStarRatingControl *ratingControl = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, sliderY, 320, 60) andStars:5 isFractional:NO];
+        DLStarRatingControl *ratingControl = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, sliderY, screenWidth, 60) andStars:5 isFractional:NO];
         ratingControl.delegate = self;
         
 //Yellow Gradient
-       // [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
+        [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
-        [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
-        [self.view addSubview:ratingControl];
+        //[ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
+        [scrollView addSubview:ratingControl];
         quesY = quesY+111;
         sliderY = sliderY+111;
         
@@ -69,18 +82,18 @@
         
         if (cnt % 2) {
 //yellow Gradient
-           // UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"EACB44"];
+            UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"EACB44"];
 // Blue Gradient
-            UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"D46BFA"];
+            //UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"D46BFA"];
             reviewQuestion1.backgroundColor = altCellColor;
             ratingControl.backgroundColor = altCellColor;
         }
         cnt = cnt+1;
-        if (cnt == 4){
+/*        if (cnt == 4){
             break;
         }
         
-/*// Have to figure out hw to handle null questions.
+// Have to figure out hw to handle null questions.
         if (![reviewQuestion  isEqual: @"<null>"]) {
             reviewQuestion1.text = reviewQuestion;
             quesY = quesY+55;
@@ -91,17 +104,21 @@
                 
         }*/
     }
+    
+    scrollView.contentSize = CGSizeMake(screenWidth, sliderY + 120);
 // Adding Submmit button and setting UI parameters.
     UIButton *submit= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submit addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [submit setFrame:CGRectMake(90, 455, 140, 40)];
+    [submit setFrame:CGRectMake(screenWidth/2-70, sliderY - 25, 140, 40)];
     [submit setTitle:@"Submit" forState:UIControlStateNormal];
     [submit setExclusiveTouch:YES];
     submit.layer.cornerRadius = 1;
     submit.layer.borderWidth = 1;
     submit.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
     [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view addSubview:submit];
+    [scrollView addSubview:submit];
+    
+    [self.view addSubview:scrollView];
 }
 
 //  Submit Buton Action - Collecting the ratings, Creating JSON and posting it to server.
@@ -148,7 +165,7 @@
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%tu", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
   // Getting response from server for the posted data.
     NSError *errorReturned = nil;
     NSURLResponse *theResponse =[[NSURLResponse alloc]init];

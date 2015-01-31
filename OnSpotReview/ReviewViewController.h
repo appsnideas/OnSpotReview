@@ -16,6 +16,7 @@
 @property (strong, nonatomic) EventList *reviewEventList;
 @property (strong, nonatomic) NSMutableDictionary *ratings;
 @property (strong, nonatomic) NSMutableDictionary *ratingValues;
+@property (strong, nonatomic) NSArray * reviewQuestions;
 
 
 //@property (strong, nonatomic) IBOutlet UITextView *reviewQuestion1;

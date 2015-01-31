@@ -68,9 +68,9 @@
     
 //Setting UI Parameters
   // Yellow gradient Bakground
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
   // Blue gradient Bakground
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     //self.detailDescriptionLabel.textColor = [UIColor whiteColor];
   // Adding event image on the top. This is currently hardcoded. This has to come from JSON.
     UIImageView *eventImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,80)];
