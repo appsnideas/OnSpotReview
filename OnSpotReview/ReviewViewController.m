@@ -55,6 +55,7 @@
         reviewQuestion1.font = [UIFont boldSystemFontOfSize:18];
         reviewQuestion1.font = [UIFont italicSystemFontOfSize:18];
         reviewQuestion1.autoresizesSubviews = YES;
+        reviewQuestion1.userInteractionEnabled = NO;
 //Yellow Gradient
         [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
 //Blue Gradient
@@ -114,7 +115,6 @@
     submit.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
     [submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [scrollView addSubview:submit];
-    
     [self.view addSubview:scrollView];
 }
 

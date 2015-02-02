@@ -11,10 +11,10 @@
 
 @interface MasterViewController : UITableViewController
 
-@property (strong, nonatomic) NSArray * eventList; // This is used for hardcoded data
-@property (strong, nonatomic) NSMutableArray * eventList1; // This is used for non- hardcoded data
-//@property (strong, nonatomic) NSMutableArray * eventList2; //
+//@property (strong, nonatomic) NSArray * eventList; // This is used for hardcoded data
+@property (strong, nonatomic) NSMutableArray * eventList1; // Array for parsed JSON coming from Event URL.
 @property (strong, nonatomic) NSArray * detailList;
+//@property (nonatomic) BOOL sightingFlag;
 
 @end
 

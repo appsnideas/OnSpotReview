@@ -105,6 +105,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "OnSpotReview v2.2"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

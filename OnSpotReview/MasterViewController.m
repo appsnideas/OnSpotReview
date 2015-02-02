@@ -9,16 +9,21 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "ReviewViewController.h"
 #import "EventList.h"
 #import "OnSpotUtilities.h"
 
+
 // *********************    Gimbal Related...   *********************************
 #import <FYX/FYX.h>
+#import <FYX/FYXiBeacon.h>
 #import <FYX/FYXVisitManager.h>
 #import <FYX/FYXTransmitter.h>
+#import <FYX/FYXSightingManager.h>
 
-@interface MasterViewController () <FYXServiceDelegate, FYXVisitDelegate>
+@interface MasterViewController () <FYXServiceDelegate, FYXiBeaconVisitDelegate, FYXVisitDelegate, FYXSightingDelegate>
 @property (nonatomic) FYXVisitManager *visitManager;
+@property (nonatomic) FYXSightingManager *sightingManager;
 // *********************    Gimbal Related...   *********************************
 
 // non-hardcoded..
@@ -27,6 +32,8 @@
 @end
 
 @implementation MasterViewController
+
+//@synthesize sightingFlag;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -41,12 +48,11 @@
     [FYX startService:self];
     
 // *********************    Gimbal Related...   *****************************************************
-
+    
 // Setting the background
     
 //Yellow Gradient
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"YellowBG.jpg"]]];
-    
 //Blue Gradient
     //[self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlueBG.jpg"]]];
     
@@ -175,7 +181,17 @@
     
     self.visitManager = [FYXVisitManager new];
     self.visitManager.delegate = self;
+    self.visitManager.iBeaconDelegate = self;
     [self.visitManager start];
+    
+    NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+    [options setObject:[NSNumber numberWithInt:FYXSightingOptionSignalStrengthWindowNone]
+                forKey:FYXSightingOptionSignalStrengthWindowKey];
+    
+    self.sightingManager = [[FYXSightingManager alloc] init];
+    self.sightingManager.delegate = self;
+    [self.sightingManager scanWithOptions:options];
+    
 }
 
 - (void)startServiceFailed:(NSError *)error
@@ -184,98 +200,80 @@
     NSLog(@"%@", error);
 }
 
+/*****************      iBeacon Code. Don't think this is needed.   ******************
+
+// ibeacon code
+- (void)didArriveIBeacon:(FYXiBeaconVisit *)visit;
+{
+    // this will be invoked when a managed Gimbal beacon is sighted for the first time
+    NSLog(@"I arrived within the proximity of a Gimbal iBeacon!!! Proximity UUID:%@ Major:%@ Minor:%@", visit.iBeacon.uuid, visit.iBeacon.major, visit.iBeacon.minor);
+}
+- (void)receivedIBeaconSighting:(FYXiBeaconVisit *)visit updateTime:(NSDate *)updateTime RSSI:(NSNumber *)RSSI;
+{
+    // this will be invoked when a managed Gimbal beacon is sighted during an on-going visit
+    NSLog(@"I received a iBeacon sighting!!! Proximity UUID:%@ Major:%@ Minor:%@ %@", visit.iBeacon.uuid, visit.iBeacon.major, visit.iBeacon.minor, visit);
+}
+- (void)didDepartIBeacon:(FYXiBeaconVisit *)visit;
+{
+    // this will be invoked when a managed Gimbal beacon has not been sighted for some time
+    NSLog(@"I left the proximity of a Gimbal iBeacon!!!! Proximity UUID:%@ Major:%@ Minor:%@", visit.iBeacon.uuid, visit.iBeacon.major, visit.iBeacon.minor);
+    NSLog(@"I was around the iBeacon for %f seconds", visit.dwellTime);
+}
+// End Ibeacon code.
+
+*****************      iBeacon Code. Don't think this is needed.   ******************/
+
 - (void)didArrive:(FYXVisit *)visit;
 {
     // this will be invoked when an authorized transmitter is sighted for the first time
-    // Grabbing data from URL
-    NSURL *eventsURL = [NSURL URLWithString:@"https://damp-journey-8712.herokuapp.com/osrevents/54ba0e697ae8c6090051e9b0"];
+ 
+// Grabbing data from URL
+    NSString * eventUrl = [NSString stringWithFormat:@"https://damp-journey-8712.herokuapp.com/osrevents/%@",visit.transmitter.name];
+    NSURL *eventsURL = [NSURL URLWithString:eventUrl];
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
     NSError *error = nil;
     
-    // Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
+// Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
     NSDictionary *eventDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-    
-    // instantiating 'Mutable Array declared in .h. Why Mutable - coz we are adding elements dynamically and do not know the capcity.
     self.eventList1 = [NSMutableArray array];
+    EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
+ 
+// Gathering EventId
+    if ([eventDictionary objectForKey:@"_id"] == NULL)
+    {
+        eventLists.eventId = NULL;
+    }
+    else
+    {
+        eventLists.eventId = [eventDictionary objectForKey:@"_id"];
+    }
     
-    // Loop thru the array to parse and store the data into our custom class.
-    // Here we instantiate an object (eventLists) of our custom class, 'EventList' and add data into its properties (Declared variables).
-    // NOTE: The ending parts (@title, @author etc..are keys from URL, not our variables
+//Populating data dictionary for review questions.
+    NSString *reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
+    NSString *reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
+    eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:reviewQuestion, reviewQuestionId, nil];
+    [self.eventList1 addObject:eventLists];
     
-    //for (NSDictionary *eventDictionary in eventListArray)
-    //{
-        EventList *eventLists = [EventList eventListWithName:[eventDictionary objectForKey:@"name"]];
-        
-        if ([eventDictionary objectForKey:@"address"] == NULL)
-        {
-            eventLists.address = NULL;
-        }
-        else
-        {
-            eventLists.address = [eventDictionary objectForKey:@"address"];
-        }
-        
-        if ([eventDictionary objectForKey:@"description"] == NULL)
-        {
-            eventLists.description = NULL;
-        }
-        else
-        {
-            eventLists.description = [eventDictionary objectForKey:@"description"];
-        }
-        
-        if ([eventDictionary objectForKey:@"eventDateAndTime"] == NULL)
-        {
-            eventLists.dateTime = NULL;
-        }
-        else
-        {
-            eventLists.dateTime = [eventDictionary objectForKey:@"eventDateAndTime"];
-        }
-        
-        if ([eventDictionary objectForKey:@"_id"] == NULL)
-        {
-            eventLists.eventId = NULL;
-        }
-        else
-        {
-            eventLists.eventId = [eventDictionary objectForKey:@"_id"];
-        }
-        
-        if ([eventDictionary objectForKey:@"website"] == NULL)
-        {
-            eventLists.website = NULL;
-        }
-        else
-        {
-            eventLists.website = [eventDictionary objectForKey:@"website"];
-        }
-        
-        if ([eventDictionary objectForKey:@"ticketingurl"] == NULL)
-        {
-            eventLists.ticketingURL = NULL;
-        }
-        else
-        {
-            eventLists.ticketingURL = [eventDictionary valueForKeyPath:@"ticketingurl.ticketingurl"];
-        }
-        
-        //Populating data dictionary for review questions.
-        NSString *reviewQuestionId = [eventDictionary valueForKeyPath:@"reviewquestions.id"];
-        NSString *reviewQuestion = [eventDictionary valueForKeyPath:@"reviewquestions.question"];
-        eventLists.reviewQuestions = [NSDictionary dictionaryWithObjectsAndKeys:reviewQuestion, reviewQuestionId, nil];
-        
-        // What exactly does this statement do??
-        [self.eventList1 addObject:eventLists];
-    NSLog(@"In Gimbal didArrive");
-   // }
+    UIStoryboard * storyboard = self.storyboard;
+    ReviewViewController *add =
+    [storyboard instantiateViewControllerWithIdentifier:@"ReviewViewController"];
+    
+    [add setReviewEventList:eventLists];
+    [self presentViewController:add animated:YES completion:nil];
 
-    NSLog(@"I arrived at a Gimbal Beacon!!! %@", visit.transmitter.name);
+    //NSLog(@"In Gimbal didArrive");
+    //NSLog(@"I arrived at a Gimbal Beacon!!! %@", visit.transmitter.ownerId);
+
 }
+
+- (void)didReceiveSighting:(FYXTransmitter *)transmitter time:(NSDate *)time RSSI:(NSNumber *)RSSI
+{
+    //NSLog(@"in did Receive Sighting");
+}
+
 - (void)receivedSighting:(FYXVisit *)visit updateTime:(NSDate *)updateTime RSSI:(NSNumber *)RSSI;
 {
-    // this will be invoked when an authorized transmitter is sighted during an on-going visit
-    //NSLog(@"I received a sighting!!! %@", visit.transmitter.name);
+    
 }
 - (void)didDepart:(FYXVisit *)visit;
 {

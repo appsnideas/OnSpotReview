@@ -166,4 +166,16 @@ Added code to come back to event list when review alert is dismissed.
 
 _Vamsi (Jan 31st 3:00 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 3.0
+
+One other major version.
+Implemented the pop up review questions. When a phone is sighted, the review questions screen will pop up, user submits the review and it goes to the server.
+The submission also has thank you alert and after alert dismiss the app 1st screen opens up.
+
+Pending:
+Need to check out if iBeacon is necessary. If not, make it a regular beacon and test it.
+Test if the beacon detects the phone and pops up the querstions wihout connecting to mac. This needs a build to test flight. Vamsi to build it, upload it and share it.
+Work on Icon.
+_Vamsi (Feb 2nd 2:28 PM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
