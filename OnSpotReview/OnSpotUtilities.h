@@ -17,6 +17,10 @@
 + (void)setMasterBGColor:(UITableViewController *)masterController;
 + (void)setBGColor: (UIViewController *)viewController;
 + (NSDate *) formattedDateTime: (NSString *)dateTime;
-+ (void)scheduleNotificationWithItem:(EventList *)eventListPopUp interval:(int)minutesAfter;
++ (void)scheduleNotificationWithItem:(EventList *)eventListPopUp interval:(int)minutesAfter  later:(BOOL) laterFlag;
++ (EventList *) getEventDetails:(NSString *)eventId;
++ (NSString *) getNextUserInfoIdentifier;
++ (void) removeFromUserInfoDict: (NSString *) key;
++ (NSMutableDictionary *) getUserInfoDict;
 
 @end

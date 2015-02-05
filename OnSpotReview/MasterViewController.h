@@ -18,9 +18,8 @@
 //@property (nonatomic) BOOL sightingFlag;
 @property (strong, nonatomic) EventList * eventListPopUp;
 
-+ (EventList *) getEventDetails:(NSString *)eventId;
-+ (NSString *) getEventId;
-+ (void) setEventId : (NSString *)id;
+//+ (NSString *) getEventId;
+//+ (void) setEventId : (NSString *)id;
 
 @end
 

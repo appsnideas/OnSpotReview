@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #import <ContextCore/QLContextCoreConnector.h>
 #import "OnSpotUtilities.h"
+#import "ReviewPopUpViewController.h"
 
 
 @interface AppDelegate ()
@@ -23,9 +24,11 @@
 @implementation AppDelegate
 
 @synthesize connector;
+@synthesize gimbalServices;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 // Override point for customization after application launch.
+    [FYX disableLocationUpdates];
     [FYX setAppId:@"4fe2e9514de0cfdd51bdc978185da2e355f9b35e9fd64ff3b413988398d29861"
         appSecret:@"d436bfd7cda586173395e7f215fa2ab1b3d696b118f51da5af12b90cfdc96383"
       callbackUrl:@"selfappsnideasonspotreview://authcode"];
@@ -38,16 +41,21 @@
         connector = [QLContextCoreConnector new];
     
     [connector checkStatusAndOnEnabled: ^(QLContextConnectorPermissions *contextConnectorPermissions) {
-        NSLog(@"Already enabled");
+        //NSLog(@"Already enabled");
+        gimbalServices = [[GimbalServices alloc]init];
+        [gimbalServices startService];
     }
     disabled:^(NSError *error)
     {
         //NSLog(@"Is not enabled");
         [connector enableFromViewController:self.window.rootViewController success:^
          {
-             NSLog(@"Gimbal enabled");
+             //NSLog(@"Gimbal enabled");
+             gimbalServices = [[GimbalServices alloc]init];
+             [gimbalServices startService];
+             
          } failure:^(NSError *error) {
-             NSLog(@"Failed to initialize gimbal %@", error);
+             //NSLog(@"Failed to initialize gimbal %@", error);
          }];
     }];
     
@@ -64,122 +72,89 @@
          (UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if(notification)
+    {
+        NSDictionary * userInfo = notification.userInfo;
+        NSMutableDictionary * ourUserInfoDict = [OnSpotUtilities getUserInfoDict];
+        
+        for(NSString * key in userInfo)
+        {
+            //NSLog(@"user info key: %@", key);
+            
+            if ([ourUserInfoDict valueForKey:key])
+            {
+                //NSLog(@"Calling handleReviewNotif");
+                [self handleReviewNotification:notification identifier:@"" eventId:key];
+            }
+        }
+    }
+    
     return YES;
 }
 
 // This method is called when a local Notification is responded without using notification Actions.
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    if ([notification.userInfo[[MasterViewController getEventId]] isEqualToString:@"identifier"])
+    NSDictionary * userInfo = notification.userInfo;
+    NSMutableDictionary * ourUserInfoDict = [OnSpotUtilities getUserInfoDict];
+    
+    for(NSString * key in userInfo)
     {
-        [self handleReviewNotification:notification identifier:@""];
+        //NSLog(@"user info key: %@", key);
+        
+        if ([ourUserInfoDict valueForKey:key])
+        {
+            //NSLog(@"Calling handleReviewNotif");
+            [self handleReviewNotification:notification identifier:@"" eventId:key];
+        }
     }
 }
-/*{
-    NSLog(@"in didReceiveLocalNotification (App Delegate)");
-    if ([notification.userInfo[[MasterViewController getEventId]] isEqualToString:@"identifier"])
-    {
-        NSLog(@"in didReceiveLocalNotification(app Delegate) - If begin");
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        ReviewViewController *result = NULL;
-        if (navigationController.viewControllers)
-        {
-    //Look for the nav controller in tab bar views
-            NSLog(@"In App Delegate did receive notification navigation if");
-            for (UINavigationController *view in navigationController.viewControllers)
-            {
-                //when found, do the same thing to find the MasterViewController under the nav controller
-                if ([view isKindOfClass:[UINavigationController class]])
-                    for (UIViewController *view2 in view.viewControllers)
-                    {
-                        NSString *className = NSStringFromClass([view2 class]);
-                        NSLog(@"UI Navigation Controller Class: %@", className);
-                        if ([view2 isKindOfClass:[ReviewViewController class]])
-                            result = (ReviewViewController *) view2;
-                    }
-            }
-        }
-        if (result != NULL)
-        {
-            [result setReviewEventList:[MasterViewController getEventDetails:[MasterViewController getEventId]]];
-            [self.window.rootViewController presentViewController:result animated:YES completion:nil];
-            NSLog(@"in didReceiveLocalNotification (app delegate) - if end");
-        }
-        else
-        {
-            NSLog(@" in 'didReceiveLocal..'  Result = NULL ELSE Loop");
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-            ReviewViewController *add =
-            [mainStoryboard instantiateViewControllerWithIdentifier:@"ReviewViewController"];
-            [add setReviewEventList:[MasterViewController getEventDetails:[MasterViewController getEventId]]];
-            //[self.window.rootViewController presentViewController:add animated:YES completion:nil];
-            [self.window.rootViewController presentViewController:add animated:YES completion:nil];
-        }
-    }
-}*/
 
 // This method is called when a local Notification is responded using notification Actions.
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandler
 {
-    if ([notification.userInfo[[MasterViewController getEventId]] isEqualToString:@"identifier"])
+    NSDictionary * userInfo = notification.userInfo;
+    NSMutableDictionary * ourUserInfoDict = [OnSpotUtilities getUserInfoDict];
+    
+    for(NSString * key in userInfo)
     {
-        [self handleReviewNotification:notification identifier:identifier];
+        //NSLog(@"user info key: %@", key);
+        
+        if ([ourUserInfoDict valueForKey:key])
+        {
+            //NSLog(@"Calling handleReviewNotif");
+            [self handleReviewNotification:notification identifier:identifier eventId:key];
+        }
     }
 }
 
-- (void) handleReviewNotification:(UILocalNotification *)notification identifier:(NSString *)identifier
+- (void) handleReviewNotification:(UILocalNotification *)notification identifier:(NSString *)identifier eventId: (NSString *)eventId
 {
-    EventList * eventList = [MasterViewController getEventDetails:[MasterViewController getEventId]];
+    EventList * eventList = [OnSpotUtilities getEventDetails:eventId];
+    [OnSpotUtilities removeFromUserInfoDict:eventId];
     if([identifier isEqualToString:@"CLOSE_ID"])
     {
         return;
     }
     if([identifier isEqualToString:@"LATER_ID"])
     {
-        [OnSpotUtilities scheduleNotificationWithItem:eventList interval:1];
+        [OnSpotUtilities scheduleNotificationWithItem:eventList interval:120 later:TRUE]; // Production
+        //[OnSpotUtilities scheduleNotificationWithItem:eventList interval:1 later:TRUE];
         return;
     }
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    ReviewViewController *result = NULL;
-    if (navigationController.viewControllers)
-    {
-        //look for the nav controller in tab bar views
-        NSLog(@"In App Delegate Handle Action with identifier - if");
-        for (UINavigationController *view in navigationController.viewControllers)
-        {
-            NSLog(@" View Class Name: %@", [[view class] class]);
-            //when found, do the same thing to find the MasterViewController under the nav controller
-            if ([view isKindOfClass:[ReviewViewController class]])
-            {
-                // NSLog(@"%@", [[view class] class]);
-                for (UIViewController *view2 in view.viewControllers)
-                {
-                    NSString *className = NSStringFromClass([view2 class]);
-                    //NSLog(@"UI Navigation Controller Class: %@", className);
-                    if ([view2 isKindOfClass:[ReviewViewController class]])
-                        result = (ReviewViewController *) view2;
-                }
-            }
-        }
-    }
-    if (result != NULL)
-    {
-        [result setReviewEventList:[MasterViewController getEventDetails:[MasterViewController getEventId]]];
-        [self.window.rootViewController presentViewController:result animated:YES completion:nil];
-        NSLog(@"In App Delegate Handle Action with identifier - if end");
-    }
-    else{
-        //NSLog(@" in 'handleActionWith..' Result = NULL ELSE Loop");
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        //NSLog(@"Main Story Board: %@", mainStoryboard);
-        ReviewViewController *add =
-        [mainStoryboard instantiateViewControllerWithIdentifier:@"ReviewViewController"];
-        [add setReviewEventList:[MasterViewController getEventDetails:[MasterViewController getEventId]]];
-        [self.window.rootViewController presentViewController:add animated:YES completion:nil];
-    }
+    
+// Calling Review Pop Up.
+    ReviewPopUpViewController *V2 = [[ReviewPopUpViewController alloc] init];
+    [V2 setReviewEventList:[OnSpotUtilities getEventDetails:eventId]];
+    V2.modalPresentationStyle = UIModalPresentationCurrentContext;
+    V2.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    V2.preferredContentSize = CGSizeMake(325, 75);
+    [self.window.rootViewController presentModalViewController:V2 animated:YES];
 }
 
-/*
+/*********************************      Methods Not Used    ************************
+ 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(UILocalNotification *)notification
 {
     NSLog(@"in didReceiveRemoteNotification - App Delegate");
@@ -225,6 +200,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}*/
+}
+ 
+ *********************************      Methods Not Used    ************************/
 
 @end

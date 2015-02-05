@@ -200,3 +200,19 @@ Add the 2 hr check to the "Later" action.
 
 Vamsi (Feb 4th 5:35 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v3.5
+There was a bug in previous build that when a becon is sighted/arrived for 2nd, then the app was failing to pop up the review though the beacon was departed form the first sighting/arrival. This bug was rwsolved by adding a pop up review view instead of using the regular eview view.
+This has been tetd with connecting to mac. Needs to be tested with test flight build.
+Also added icon to the app.
+
+_Vamsi (Feb 5th 5:48 AM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v4.0 (App Submission Version)
+Bugs are resolved.
+Configured for iBeacons.
+Times times have been chnaged to production values.
+Timer after did arrive is a configurable parameter via ibeacon "Major Version".
+Submitting the app for publishing
+
+_Vamsi (Feb 5th 9:15 am)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

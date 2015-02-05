@@ -43,6 +43,8 @@
 		ACBF3ED01A612315000ED09E /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBF3ECF1A612315000ED09E /* ReviewViewController.m */; };
 		ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED21A639A95000ED09E /* fog.jpg */; };
 		ACBF3F0F1A64801F000ED09E /* DevTips in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3F0E1A64801F000ED09E /* DevTips */; };
+		ACC26CE41A835AF1005D901D /* GimbalServices.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC26CE31A835AF1005D901D /* GimbalServices.m */; };
+		ACC26D4E1A83A2E7005D901D /* ReviewPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC26D4D1A83A2E7005D901D /* ReviewPopUpViewController.m */; };
 		ACCFCAB31A776CEC00018AE9 /* BlueBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACCFCAB11A776CEC00018AE9 /* BlueBG.jpg */; };
 		ACCFCAB61A776D6400018AE9 /* BlueYellow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACCFCAB51A776D6400018AE9 /* BlueYellow.jpg */; };
 		ACCFCABA1A782DBF00018AE9 /* GreenBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACCFCAB71A782DBF00018AE9 /* GreenBG.jpg */; };
@@ -119,6 +121,10 @@
 		ACBF3ECF1A612315000ED09E /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		ACBF3ED21A639A95000ED09E /* fog.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fog.jpg; sourceTree = "<group>"; };
 		ACBF3F0E1A64801F000ED09E /* DevTips */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DevTips; sourceTree = "<group>"; };
+		ACC26CE21A835AF1005D901D /* GimbalServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GimbalServices.h; sourceTree = "<group>"; };
+		ACC26CE31A835AF1005D901D /* GimbalServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GimbalServices.m; sourceTree = "<group>"; };
+		ACC26D4C1A83A2E7005D901D /* ReviewPopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewPopUpViewController.h; sourceTree = "<group>"; };
+		ACC26D4D1A83A2E7005D901D /* ReviewPopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewPopUpViewController.m; sourceTree = "<group>"; };
 		ACCFCAB11A776CEC00018AE9 /* BlueBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlueBG.jpg; sourceTree = "<group>"; };
 		ACCFCAB51A776D6400018AE9 /* BlueYellow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BlueYellow.jpg; sourceTree = "<group>"; };
 		ACCFCAB71A782DBF00018AE9 /* GreenBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GreenBG.jpg; sourceTree = "<group>"; };
@@ -198,12 +204,16 @@
 				ACDF60481A774AD1001E8D63 /* DLStarRating */,
 				AC30A3CA1A60AD0E00E06480 /* AppDelegate.h */,
 				AC30A3CB1A60AD0E00E06480 /* AppDelegate.m */,
+				ACC26CE21A835AF1005D901D /* GimbalServices.h */,
+				ACC26CE31A835AF1005D901D /* GimbalServices.m */,
 				AC30A3CD1A60AD0E00E06480 /* MasterViewController.h */,
 				AC30A3CE1A60AD0E00E06480 /* MasterViewController.m */,
 				AC30A3D01A60AD0E00E06480 /* DetailViewController.h */,
 				AC30A3D11A60AD0E00E06480 /* DetailViewController.m */,
 				ACBF3ECE1A612315000ED09E /* ReviewViewController.h */,
 				ACBF3ECF1A612315000ED09E /* ReviewViewController.m */,
+				ACC26D4C1A83A2E7005D901D /* ReviewPopUpViewController.h */,
+				ACC26D4D1A83A2E7005D901D /* ReviewPopUpViewController.m */,
 				AC30A4291A60B03500E06480 /* EventList.h */,
 				AC30A42A1A60B03500E06480 /* EventList.m */,
 				ACDF605F1A7756C0001E8D63 /* OnSpotUtilities.h */,
@@ -505,9 +515,11 @@
 				AC30A42B1A60B03500E06480 /* EventList.m in Sources */,
 				ACDF60611A7756C0001E8D63 /* OnSpotUtilities.m in Sources */,
 				ACBF3ED01A612315000ED09E /* ReviewViewController.m in Sources */,
+				ACC26CE41A835AF1005D901D /* GimbalServices.m in Sources */,
 				AC30A3CF1A60AD0E00E06480 /* MasterViewController.m in Sources */,
 				ACDF60571A774AD1001E8D63 /* DLStarView.m in Sources */,
 				AC30A3C91A60AD0E00E06480 /* main.m in Sources */,
+				ACC26D4E1A83A2E7005D901D /* ReviewPopUpViewController.m in Sources */,
 				ACDF60561A774AD1001E8D63 /* DLStarRatingControl.m in Sources */,
 				AC30A3D21A60AD0E00E06480 /* DetailViewController.m in Sources */,
 			);

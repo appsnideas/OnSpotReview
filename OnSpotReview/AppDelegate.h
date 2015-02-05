@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <ContextCore/QLContextCoreConnector.h>
+#import "GimbalServices.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) QLContextCoreConnector *connector;
-
-//-(void) handleNotification:(UILocalNotification *)notification;
+@property (strong, nonatomic) GimbalServices * gimbalServices;
 
 @end
 

@@ -51,7 +51,7 @@
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    //CGFloat screenHeight = screenRect.size.height;
     //[ratings init];
     
     UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,
@@ -90,6 +90,9 @@
 // End Setting UI Parameters
 
 // Adding Review button programatically
+    NSDate * eventDate = [OnSpotUtilities formattedDateTime:detailEventList.dateTime];
+    NSDate * currDate = [NSDate date];
+    
     UIButton *review= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [review addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [review setFrame:CGRectMake(screenWidth/2-70, 455, 140, 40)];
@@ -100,6 +103,12 @@
     review.layer.borderWidth = 1;
     review.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
     [review setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    if([currDate earlierDate:eventDate] == currDate)
+    {
+        review.enabled = NO;
+        review.userInteractionEnabled = NO;
+        review.alpha = 0.5;
+    }
     [scrollView addSubview:review];
     scrollView.contentSize = CGSizeMake(screenWidth, 600);
     [self.view addSubview:scrollView];

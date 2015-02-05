@@ -1,12 +1,12 @@
 //
-//  ReviewViewController.m
+//  ReviewPopUpControllerViewController.m
 //  OnSpotReview
 //
-//  Created by Vamsikrishna Nadella on 1/10/15.
+//  Created by Vamsikrishna Nadella on 2/5/15.
 //  Copyright (c) 2015 appsnideas. All rights reserved.
 //
 
-#import "ReviewViewController.h"
+#import "ReviewPopUpViewController.h"
 #import "DetailViewController.h"
 #import <UIKit/UIKit.h>
 #import "EventList.h"
@@ -14,11 +14,11 @@
 #import "OnSpotUtilities.h"
 #import "MasterViewController.h"
 
-@interface ReviewViewController ()
+@interface ReviewPopUpViewController ()
 
 @end
 
-@implementation ReviewViewController
+@implementation ReviewPopUpViewController
 
 @synthesize reviewEventList;
 @synthesize ratings;
@@ -38,10 +38,10 @@
     UIScrollView * scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,
                                                                                self.view.frame.size.width,
                                                                                self.view.frame.size.height)];
-
-// Yellow gradient Bakground
+    
+    // Yellow gradient Bakground
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"YellowBG.jpg"]];
-// Blue gradient Bakground
+    // Blue gradient Bakground
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     
     NSArray *reviewQuestionsArray = reviewEventList.reviewQuestions.allValues[0];
@@ -56,9 +56,9 @@
         reviewQuestion1.font = [UIFont italicSystemFontOfSize:18];
         reviewQuestion1.autoresizesSubviews = YES;
         reviewQuestion1.userInteractionEnabled = NO;
-//Yellow Gradient
+        //Yellow Gradient
         [reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
-//Blue Gradient
+        //Blue Gradient
         //[reviewQuestion1 setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
         [scrollView addSubview:reviewQuestion1];
         reviewQuestion1.text = reviewQuestion;
@@ -66,9 +66,9 @@
         DLStarRatingControl *ratingControl = [[DLStarRatingControl alloc] initWithFrame:CGRectMake(0, sliderY, screenWidth, 60) andStars:5 isFractional:NO];
         ratingControl.delegate = self;
         
-//Yellow Gradient
+        //Yellow Gradient
         [ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"FBE479"]];
-//Blue Gradient
+        //Blue Gradient
         //[ratingControl setBackgroundColor: [OnSpotUtilities colorWithHexString:@"C463FB"]];
         [scrollView addSubview:ratingControl];
         quesY = quesY+111;
@@ -79,32 +79,32 @@
         [ratingValues setValue:[NSNumber numberWithFloat:0.0] forKey:reviewQuestion];
         
         if (cnt % 2) {
-//yellow Gradient
+            //yellow Gradient
             UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"EACB44"];
-// Blue Gradient
+            // Blue Gradient
             //UIColor *altCellColor = [OnSpotUtilities colorWithHexString:@"D46BFA"];
             reviewQuestion1.backgroundColor = altCellColor;
             ratingControl.backgroundColor = altCellColor;
         }
         cnt = cnt+1;
-/*        if (cnt == 4){
-            break;
-        }
-        
-// Have to figure out hw to handle null questions.
-        if (![reviewQuestion  isEqual: @"<null>"]) {
-            reviewQuestion1.text = reviewQuestion;
-            quesY = quesY+55;
-        }
-        else
-        {
-            continue;
-                
-        }*/
+        /*        if (cnt == 4){
+         break;
+         }
+         
+         // Have to figure out hw to handle null questions.
+         if (![reviewQuestion  isEqual: @"<null>"]) {
+         reviewQuestion1.text = reviewQuestion;
+         quesY = quesY+55;
+         }
+         else
+         {
+         continue;
+         
+         }*/
     }
     
     scrollView.contentSize = CGSizeMake(screenWidth, sliderY + 120);
-// Adding Submmit button and setting UI parameters.
+    // Adding Submmit button and setting UI parameters.
     UIButton *submit= [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submit addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [submit setFrame:CGRectMake(screenWidth/2-70, sliderY - 25, 140, 40)];
@@ -123,7 +123,7 @@
 - (void) buttonClicked:(UIButton*)sender
 {
     
-// Creating the jSON Mutable String which can be appended with exact format as needed by server.
+    // Creating the jSON Mutable String which can be appended with exact format as needed by server.
     NSData *jsonData = [[NSData alloc]init]; // Declaring NSData object for jSON.
     NSMutableString *jsonString = [[NSMutableString alloc]initWithString:@"{\"answers\":["]; // Declaring and initiating the jSON String.
     int count = 0; // Counter to control the ending elements of JSON.
@@ -140,21 +140,21 @@
     [jsonString appendString:@"],"];
     [jsonString appendString:[NSString stringWithFormat:@"\"deviceID\":\"%@\"}",[OnSpotUtilities idForVendor]]];
     NSString *eventId = reviewEventList.eventId;
-// End of jSON string creation. below is getting event ID.
-
-//jSON post - Creating Json (NS)Data from the above string and URL from Data.
+    // End of jSON string creation. below is getting event ID.
+    
+    //jSON post - Creating Json (NS)Data from the above string and URL from Data.
     jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     //NSString *strData = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     //NSLog(@"JSON Data%@", strData);
     NSString *urlString = [NSString stringWithFormat:@"https://damp-journey-8712.herokuapp.com/osrevents/%@/osreventreviews", eventId];
     NSURL *reviewURL = [NSURL URLWithString:urlString];
-  // Creating request and posting to server.
+    // Creating request and posting to server.
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reviewURL];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: jsonData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%tu", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
-  // Getting response from server for the posted data.
+    // Getting response from server for the posted data.
     NSError *errorReturned = nil;
     NSURLResponse *theResponse =[[NSURLResponse alloc]init];
     //NSLog(@"Request: %@", request);
@@ -169,7 +169,7 @@
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&jsonParsingError];
     }
     
-//
+    //
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                     message:@"Thank you for submitting the review. You helped us in a great way!!"
                                                    delegate:nil
@@ -177,42 +177,8 @@
                                           otherButtonTitles:nil];
     [alert show];
     
-/*    UIStoryboard * storyboard = self.storyboard;
-    MasterViewController *add =
-    [storyboard instantiateViewControllerWithIdentifier:@"NavigationControler"];
-    UINavigationController *navigationController =(UINavigationController*)[[
-                                                               [[UIApplication sharedApplication]delegate] window] rootViewController];*/
-   /*
-    MasterViewController *result = NULL;
-    for (UINavigationController *view in navigationController.viewControllers)
-    {
-        NSLog(@" View Class Name: %@", [[view class] class]);
-        if ([view isKindOfClass:[MasterViewController class]])
-        {
-            NSLog(@" Presenting Class Name: %@", [[view class] class]);
-          
-            [navigationController.viewControllers[0] presentViewController:view animated:YES completion:nil];
-            return;
-        }
-        
-    }
-    if(result == NULL)*/
-    
-    UIStoryboard * storyboard = self.storyboard;
-    MasterViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
-    UINavigationController *nav = [[UINavigationController alloc]
-                                   initWithRootViewController:controller];
-    [self presentViewController:nav animated:YES completion:nil];
-    
-/*    {
-        UIStoryboard * storyboard = self.storyboard;
-        MasterViewController *add =
-        [storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
-        [self presentViewController:add animated:YES completion:nil];
-    }*/
-    // [alert release];
-
-    
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 // End JSON Post and button click code
 
@@ -227,5 +193,16 @@
     [ratingValues setValue:[NSNumber numberWithFloat:rating] forKey:reviewQuestion];
     
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
