@@ -10,6 +10,8 @@
 @import UIKit;
 #import <UIKit/UIKit.h>
 #import <uuid/uuid.h>
+#import "EventList.h"
+#import "MasterViewController.h"
 
 @implementation OnSpotUtilities
 
@@ -67,5 +69,69 @@
     return [[UIDevice currentDevice].identifierForVendor UUIDString];
     
 }
+
++ (NSDate *) formattedDateTime: (NSString *)dateTime{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:posix];
+    NSDate *formattedDateTime = [dateFormatter dateFromString:dateTime];
+    [dateFormatter setDateFormat:@"MMM dd yyyy 'at' hh:mm a"];
+    return formattedDateTime;
+}
+
++ (void)scheduleNotificationWithItem:(EventList *)eventListPopUp interval:(int)minutesAfter
+{
+//    NSDate *itemDate = [OnSpotUtilities formattedDateTime:item.dateTime];
+    NSLog(@"in scheduleNotificationWithItem - begin");
+    NSDate *itemDate = [NSDate date];
+    /***********************************************************/
+    // Interactive Notifications Alert - Registering an Action
+    NSLog(@"Event Date and Time schedule: %@",itemDate);
+    UIMutableUserNotificationAction *review = [[UIMutableUserNotificationAction alloc] init];
+    UIMutableUserNotificationAction *later = [[UIMutableUserNotificationAction alloc] init];
+    review.identifier = @"REVIEW_ID";//item.eventId; // The id passed when the user selects the action
+    later.identifier = @"CLOSE_ID";//item.eventId;
+    review.title = NSLocalizedString(@"Sure!..",nil);
+    later.title = NSLocalizedString(@"Close",nil);
+    review.activationMode = UIUserNotificationActivationModeForeground;
+    later.activationMode = UIUserNotificationActivationModeBackground;
+    review.destructive = NO; // If YES, then the action is red
+    later.destructive = NO;
+    review.authenticationRequired = YES;
+    later.authenticationRequired = NO;// Whether the user must authenticate to execute the action
+    
+    // Interactive Notifications Category - Creating a Category of Actions
+    UIMutableUserNotificationCategory *firstResponse = [[UIMutableUserNotificationCategory alloc] init];
+    firstResponse.identifier = @"REVIEW_CATEGORY"; // Identifier passed in the payload
+    //[firstResponse setActions:@[review, later] forContext:UIUserNotificationActionContextDefault];
+    [firstResponse setActions:@[review, later] forContext:UIUserNotificationActionContextMinimal];
+    
+    // Registering Categories
+    NSSet *categories = [NSSet setWithObjects:firstResponse, nil];
+    NSUInteger types = UIUserNotificationTypeAlert | UIUserNotificationTypeSound; // Add badge, sound, or alerts here
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
+    // Local Notifications
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.category = @"REVIEW_CATEGORY";
+    [localNotif setUserInfo:@{eventListPopUp.eventId : @"identifier"}];
+    //[localNotif setUserInfo:@{eventListPopUp.eventId : eventListPopUp}];
+    localNotif.fireDate = [itemDate dateByAddingTimeInterval:+(minutesAfter*60)];
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ would love to get your feedback for the event.", nil),eventListPopUp.eventName];
+    //localNotif.alertAction = NSLocalizedString(@"Yes", nil);
+    //localNotif. = NSLocalizedString(@"Event Review", nil);
+    localNotif.soundName = UILocalNotificationDefaultSoundName;
+    //localNotif.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    [MasterViewController setEventId: eventListPopUp.eventId];
+    NSLog(@"in scheduleNotificationWithItem - end");
+}
+
+
 
 @end

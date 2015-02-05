@@ -80,4 +80,15 @@
     return [dateFormatter stringFromDate:formattedDate];
 }
 
+- (NSString *) formattedTime {
+    // Date Formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:posix];
+    NSDate *formattedTime = [dateFormatter dateFromString:self.dateTime];
+    [dateFormatter setDateFormat:@"hh:mm"];
+    return [dateFormatter stringFromDate:formattedTime];
+}
+
 @end

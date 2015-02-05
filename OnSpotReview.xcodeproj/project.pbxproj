@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0D23501A82AE13004E7766 /* Icon1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AC0D234F1A82AE13004E7766 /* Icon1.jpg */; };
+		AC0D23521A82BE3B004E7766 /* Icon1.2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AC0D23511A82BE3B004E7766 /* Icon1.2.jpg */; };
 		AC30A3C91A60AD0E00E06480 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AC30A3C81A60AD0E00E06480 /* main.m */; };
 		AC30A3CC1A60AD0E00E06480 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC30A3CB1A60AD0E00E06480 /* AppDelegate.m */; };
 		AC30A3CF1A60AD0E00E06480 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC30A3CE1A60AD0E00E06480 /* MasterViewController.m */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0D234F1A82AE13004E7766 /* Icon1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon1.jpg; sourceTree = "<group>"; };
+		AC0D23511A82BE3B004E7766 /* Icon1.2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon1.2.jpg; sourceTree = "<group>"; };
 		AC30A3C31A60AD0E00E06480 /* OnSpotReview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnSpotReview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC30A3C71A60AD0E00E06480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC30A3C81A60AD0E00E06480 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -244,6 +248,8 @@
 		AC30A4181A60AFAF00E06480 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AC0D23511A82BE3B004E7766 /* Icon1.2.jpg */,
+				AC0D234F1A82AE13004E7766 /* Icon1.jpg */,
 				ACCFCAC41A7880A100018AE9 /* Stars.jpg */,
 				ACCFCAC01A78800C00018AE9 /* SpotLight.jpg */,
 				ACCFCAC11A78800C00018AE9 /* Star_Faded.jpg */,
@@ -446,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC0D23501A82AE13004E7766 /* Icon1.jpg in Resources */,
 				ACCFCAC21A78800C00018AE9 /* SpotLight.jpg in Resources */,
 				ACCFCABC1A782DBF00018AE9 /* YellowBG.jpg in Resources */,
 				AC30A4271A60AFAF00E06480 /* TestReviewBg.jpg in Resources */,
@@ -465,6 +472,7 @@
 				ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */,
 				AC30A4261A60AFAF00E06480 /* TestIconTrans.jpg in Resources */,
 				ACCFCABB1A782DBF00018AE9 /* GreenBlurBG.jpg in Resources */,
+				AC0D23521A82BE3B004E7766 /* Icon1.2.jpg in Resources */,
 				ACDF60581A774AD1001E8D63 /* star.png in Resources */,
 				ACDF605B1A774AD1001E8D63 /* star_highlighted-darker@2x.png in Resources */,
 				AC30A4241A60AFAF00E06480 /* SwaramGoldSpot.jpg in Resources */,

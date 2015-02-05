@@ -45,8 +45,8 @@
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BlueBG.jpg"]];
     
     NSArray *reviewQuestionsArray = reviewEventList.reviewQuestions.allValues[0];
-    int quesY = 0; //y = 70 (Was the previous start)
-    int sliderY = 55;
+    int quesY = 20; //y = 70 (Was the previous start)
+    int sliderY = 75;
     int cnt = 0;
     for (NSString *reviewQuestion in reviewQuestionsArray)
     {
@@ -109,7 +109,8 @@
     [submit addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [submit setFrame:CGRectMake(screenWidth/2-70, sliderY - 25, 140, 40)];
     [submit setTitle:@"Submit" forState:UIControlStateNormal];
-    [submit setExclusiveTouch:YES];
+    [submit setExclusiveTouch:TRUE];
+    [submit setShowsTouchWhenHighlighted:TRUE];
     submit.layer.cornerRadius = 1;
     submit.layer.borderWidth = 1;
     submit.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color
@@ -172,7 +173,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                     message:@"Thank you for submitting the review. You helped us in a great way!!"
                                                    delegate:nil
-                                          cancelButtonTitle:@"Dismiss"
+                                          cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
     

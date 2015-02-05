@@ -94,7 +94,8 @@
     [review addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [review setFrame:CGRectMake(screenWidth/2-70, 455, 140, 40)];
     [review setTitle:@"Review" forState:UIControlStateNormal];
-    [review setExclusiveTouch:YES];
+    [review setExclusiveTouch:TRUE];
+    [review setShowsTouchWhenHighlighted:TRUE];
     review.layer.cornerRadius = 1;
     review.layer.borderWidth = 1;
     review.backgroundColor = [OnSpotUtilities colorWithHexString:@"587EAA"]; // Matching the "review" button color

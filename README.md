@@ -176,6 +176,27 @@ Pending:
 Need to check out if iBeacon is necessary. If not, make it a regular beacon and test it.
 Test if the beacon detects the phone and pops up the querstions wihout connecting to mac. This needs a build to test flight. Vamsi to build it, upload it and share it.
 Work on Icon.
+
 _Vamsi (Feb 2nd 2:28 PM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview v 3.1
+Implemented Notification Actions, a major change from previous version.
+Implemented all the test cases listed below
+1. App will recognize the beacon and pop up a notification (action based) for review
+    1. Even when the the phone is locked
+    2. When locked, selecting a "review" action will ask user for passcode and will open review when unlocked.
+    3. Even when the app is *not* running in the back ground.
+2. App will recognize the beacon and pop up a notification (action based) for review.
+    1. when is open and is in the back ground.
+3. App is open and is in the foreground
+    1. it will silently pop up the review.
+Added "Pilot Version" in splash screen
 
+Pending:
+Add "Pilot" on the icon.
+Claen up the code - remove unnecessary code, commented code, log messages etc..
+Add icon to the app.
+Add the 2 hr check to the "Later" action.
+
+Vamsi (Feb 4th 5:35 PM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

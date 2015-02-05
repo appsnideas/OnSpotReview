@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UIKit/UIKit.h"
+#import "EventList.h"
 
 @interface OnSpotUtilities : NSObject
 
@@ -15,5 +16,7 @@
 + (UIColor*)colorWithHexString:(NSString*)hex;
 + (void)setMasterBGColor:(UITableViewController *)masterController;
 + (void)setBGColor: (UIViewController *)viewController;
++ (NSDate *) formattedDateTime: (NSString *)dateTime;
++ (void)scheduleNotificationWithItem:(EventList *)eventListPopUp interval:(int)minutesAfter;
 
 @end

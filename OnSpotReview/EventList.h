@@ -59,4 +59,6 @@
 
 - (NSString *) formattedDate;
 
+- (NSString *) formattedTime;
+
 @end

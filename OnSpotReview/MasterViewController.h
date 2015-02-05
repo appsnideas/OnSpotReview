@@ -8,6 +8,7 @@
 
 // We need UIKIT becaasue everything is part of UI Kit
 #import <UIKit/UIKit.h>
+#import "EventList.h"
 
 @interface MasterViewController : UITableViewController
 
@@ -15,6 +16,11 @@
 @property (strong, nonatomic) NSMutableArray * eventList1; // Array for parsed JSON coming from Event URL.
 @property (strong, nonatomic) NSArray * detailList;
 //@property (nonatomic) BOOL sightingFlag;
+@property (strong, nonatomic) EventList * eventListPopUp;
+
++ (EventList *) getEventDetails:(NSString *)eventId;
++ (NSString *) getEventId;
++ (void) setEventId : (NSString *)id;
 
 @end
 
