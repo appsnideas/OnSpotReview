@@ -98,13 +98,13 @@
     eventListPopUp = eventLists;
     
 // Scheduling a Push Notification. See method below.
-    //[OnSpotUtilities scheduleNotificationWithItem: eventLists interval:201 later:FALSE]; //Production
-    [OnSpotUtilities scheduleNotificationWithItem: eventLists interval:1 later:FALSE];
+    [OnSpotUtilities scheduleNotificationWithItem: eventLists interval:201 later:FALSE]; //Production
+    //[OnSpotUtilities scheduleNotificationWithItem: eventLists interval:1 later:FALSE];
 }
 
 - (void)didDepart:(FYXVisit *)visit;
 {
-    // this will be invoked when an authorized transmitter has not been sighted for some time
+// this will be invoked when an authorized transmitter has not been sighted for some time
     //NSLog(@"I left the proximity of a Gimbal Beacon!!!! %@", visit.transmitter.name);
     //NSLog(@"I was around the beacon for %f seconds", visit.dwellTime);
 }
@@ -114,7 +114,7 @@
 // ibeacon code
 - (void)didArriveIBeacon:(FYXiBeaconVisit *)visit;
 {
-    // this will be invoked when a managed Gimbal beacon is sighted for the first time
+// this will be invoked when a managed Gimbal beacon is sighted for the first time
     //NSLog(@"I arrived within the proximity of a Gimbal iBeacon!!! Proximity UUID:%@ Major:%@ Minor:%@ Proximity:%@", visit.iBeacon.uuid, visit.iBeacon.major, visit.iBeacon.minor, visit.iBeacon.proximity);
     
     NSNumber * major = visit.iBeacon.major;
@@ -131,7 +131,7 @@
     NSData *jsonData = [NSData dataWithContentsOfURL:eventsURL];
     NSError *error = nil;
     
-    // Checking if JSON Data is NULL. If NULL currently displaying alert, but have to handle differently later.
+// Checking if JSON Data is NULL. If NULL currently displaying alert, but have to handle differently later.
     if ([jsonData isEqual:nil] || jsonData == NULL)
     {
         //NSLog(@"No json data");
@@ -144,7 +144,7 @@
         return;
     }
     
-    // Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
+// Creating an array of all the posts grabbed from URL and serialized using JSON Searialization.
     NSDictionary *eventDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     NSString * eventId = [eventDictionary objectForKey:@"_id"];
     if(!eventId)
@@ -152,7 +152,7 @@
     EventList *eventLists =  [OnSpotUtilities getEventDetails:eventId];
     eventListPopUp = eventLists;
     
-    // Scheduling a Push Notification. See method below.
+// Scheduling a Push Notification. See method below.
     //[OnSpotUtilities scheduleNotificationWithItem: eventLists interval:201 later:FALSE]; //Production
     [OnSpotUtilities scheduleNotificationWithItem: eventLists interval:major.intValue later:FALSE];
 }

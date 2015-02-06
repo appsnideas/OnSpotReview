@@ -39,6 +39,7 @@
 		AC30A43D1A60B2A000E06480 /* ContextProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4351A60B2A000E06480 /* ContextProfiling.framework */; };
 		AC30A43E1A60B2A000E06480 /* FYX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4361A60B2A000E06480 /* FYX.framework */; };
 		AC30A43F1A60B2A000E06480 /* NetworkServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC30A4381A60B2A000E06480 /* NetworkServices.framework */; };
+		AC7B5C371A848B6700C1265A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC30A3D61A60AD0E00E06480 /* Images.xcassets */; };
 		AC9164481A6F69F1007B0DE6 /* UserContext.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC9164471A6F69F1007B0DE6 /* UserContext.plist */; };
 		ACBF3ED01A612315000ED09E /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBF3ECF1A612315000ED09E /* ReviewViewController.m */; };
 		ACBF3ED51A639A95000ED09E /* fog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACBF3ED21A639A95000ED09E /* fog.jpg */; };
@@ -500,6 +501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC7B5C371A848B6700C1265A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +646,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -662,6 +665,7 @@
 					"$(PROJECT_DIR)/OnSpotReview/NetworkServices.embeddedframework",
 				);
 				INFOPLIST_FILE = OnSpotReview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c930ec04-be3d-402d-bb24-cbc66eae7c8e";
@@ -673,6 +677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -691,6 +696,7 @@
 					"$(PROJECT_DIR)/OnSpotReview/NetworkServices.embeddedframework",
 				);
 				INFOPLIST_FILE = OnSpotReview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c930ec04-be3d-402d-bb24-cbc66eae7c8e";

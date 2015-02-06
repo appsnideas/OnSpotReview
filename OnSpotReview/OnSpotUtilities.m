@@ -137,7 +137,9 @@ static int count = 0;
     
 // Registering Categories
     NSSet *categories = [NSSet setWithObjects:firstResponse, nil];
-    NSUInteger types = UIUserNotificationTypeAlert | UIUserNotificationTypeSound; // Add badge, sound, or alerts here
+    
+    NSUInteger types = UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+    
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     

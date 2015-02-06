@@ -216,3 +216,9 @@ Submitting the app for publishing
 
 _Vamsi (Feb 5th 9:15 am)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OnSpotReview Prod v1.0
+Submitted the code for app review.
+Removed all the debug NSLogs
+Added appropriate time intervals to notification schedules as in prodcution.
+
+_Vamsi (Feb 5th 10:33 PM)
